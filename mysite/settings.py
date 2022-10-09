@@ -83,12 +83,11 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd60s4f4k75csqm',
-        'HOST': 'ec2-52-4-87-74.compute-1.amazonaws.com',
-        'USER':'qoxhufbrsnxyeo',
-        'PASSWORD':'4dfc2851ca976940ab69f4b549877c75e1dcdb399fb5cb787c0d06d0986a914a',
-        'PORT':'5432',
-
+        'NAME': 'deef06r6bg6ce1',
+        'USER': 'jqcjxtndsskfnz',
+        'PASSWORD': '63d60af90ea751f6ce9a17b385304457badbfceeaead344144c9c719faf34ecf',
+        'HOST': 'ec2-44-205-27-92.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
