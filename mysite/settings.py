@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-p&-*#%31-k9(4vsojj%4^3a1qh4brip&mi559kx2d=hq2e%h2@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','127.0.0.1','a18-new-lous-list.herokuapp.com','cs3240-projecta18.herokuapp.com']
+ALLOWED_HOSTS = ['localhost','127.0.0.1','a18-new-lous-list.herokuapp.com','cs3240-projecta18.herokuapp.com', 'thebest222.herokuapp.com']
 
 
 # Application definition
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
