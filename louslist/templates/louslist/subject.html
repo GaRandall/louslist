@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <body>
     <h1>{{ subject }}</h1>
+    {% load stringfilters %}
     {% for i in data%}
-    {{i.subject}}{{i.catalog_number}}&nbsp;&nbsp;{{'|'}}&nbsp;&nbsp;{{i.description}}&nbsp;&nbsp;{{'|'}}&nbsp;&nbsp;{{i.component}}&nbsp;&nbsp;
-    {{'|'}}&nbsp;&nbsp;{{'Total Enrollment'}}{{':'}}&nbsp;{{i.enrollment_total}}{{'/'}}{{i.class_capacity}}<br>
+        {{ i.subject }}{{ i.catalog_number }} &nbsp;&nbsp; {{ '|' }}&nbsp;&nbsp;{{ i.description }}&nbsp;&nbsp;{{ '|' }}&nbsp;&nbsp;{{ i.component }}&nbsp;&nbsp;
+        {{ '|' }} &nbsp;&nbsp; {{ 'Total Enrollment:' }} &nbsp; {{ i.enrollment_total }} {{ '/' }} {{ i.class_capacity }}
+        {{ '|' }} &nbsp;&nbsp; {{ 'Meeting Days:' }} &nbsp; {{ i.meetings.0.days }}
+        {{ '|' }} &nbsp;&nbsp; {{ 'Meeting Time:' }} &nbsp; {{ i.meetings.0.start_time|time_beautifier }} {{ ' - ' }}
+        {{ i.meetings.0.end_time|time_beautifier }} <br>
     {% endfor %}
-
   </body>
-</html>
 </html>
