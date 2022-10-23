@@ -13,6 +13,7 @@ def home(request):
     }
     return render(request, 'louslist/index.html', context)
 
+
 def departments(request):
     path = request.path_info
     department = path[1:].upper()
