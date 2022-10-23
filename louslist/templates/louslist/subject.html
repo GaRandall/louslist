@@ -3,7 +3,8 @@
   <body>
     <h1>{{ subject }}</h1>
     {% for i in data%}
-    {{i.description}}<br>
+    {{i.subject}}{{i.catalog_number}}&nbsp;&nbsp;{{'|'}}&nbsp;&nbsp;{{i.description}}&nbsp;&nbsp;{{'|'}}&nbsp;&nbsp;{{i.component}}&nbsp;&nbsp;
+    {{'|'}}&nbsp;&nbsp;{{'Total Enrollment'}}{{':'}}&nbsp;{{i.enrollment_total}}{{'/'}}{{i.class_capacity}}<br>
     {% endfor %}
 
   </body>
