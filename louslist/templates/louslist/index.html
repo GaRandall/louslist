@@ -1,3 +1,13 @@
+{# Load the tag library #}
+{% load bootstrap5 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
 {% load socialaccount %}
 <html>
   <body>
@@ -8,209 +18,298 @@
     <a href="{% provider_login_url 'google' %}">Login With Google</a>
     {% endif %}
   </body>
-    <h1>Departments</h1>
-    <a href="{% url 'acct' %}">ACCT</a><br>
-    <a href="{% url 'airs' %}">AIRS</a><br>
-    <a href="{% url 'alar' %}">ALAR</a><br>
-    <a href="{% url 'am' %}">AM</a><br>
-    <a href="{% url 'amst' %}">AMST</a><br>
-    <a href="{% url 'anth' %}">ANTH</a><br>
-    <a href="{% url 'apma' %}">APMA</a><br>
-    <a href="{% url 'arab' %}">ARAB</a><br>
-    <a href="{% url 'arad' %}">ARAD</a><br>
-    <a href="{% url 'arah' %}">ARAH</a><br>
-    <a href="{% url 'arch' %}">ARCH</a><br>
-    <a href="{% url 'arcy' %}">ARCY</a><br>
-    <a href="{% url 'arh' %}">ARH</a><br>
-    <a href="{% url 'arth' %}">ARTH</a><br>
-    <a href="{% url 'artr' %}">ARTR</a><br>
-    <a href="{% url 'arts' %}">ARTS</a><br>
-    <a href="{% url 'asl' %}">ASL</a><br>
-    <a href="{% url 'astr' %}">ASTR</a><br>
-    <a href="{% url 'bims' %}">BIMS</a><br>
-    <a href="{% url 'bioc' %}">BIOC</a><br>
-    <a href="{% url 'biol' %}">BIOL</a><br>
-    <a href="{% url 'biop' %}">BIOP</a><br>
-    <a href="{% url 'bme' %}">BME</a><br>
-    <a href="{% url 'bus' %}">BUS</a><br>
-    <a href="{% url 'cass' %}">CASS</a><br>
-    <a href="{% url 'ce' %}">CE</a><br>
-    <a href="{% url 'cell' %}">CELL</a><br>
-    <a href="{% url 'che' %}">CHE</a><br>
-    <a href="{% url 'chem' %}">CHEM</a><br>
-    <a href="{% url 'chin' %}">CHIN</a><br>
-    <a href="{% url 'chtr' %}">CHTR</a><br>
-    <a href="{% url 'clas' %}">CLAS</a><br>
-    <a href="{% url 'cogs' %}">COGS</a><br>
-    <a href="{% url 'cola' %}">COLA</a><br>
-    <a href="{% url 'comm' %}">COMM</a><br>
-    <a href="{% url 'conc' %}">CONC</a><br>
-    <a href="{% url 'cpe' %}">CPE</a><br>
-    <a href="{% url 'creo' %}">CREO</a><br>
-    <a href="{% url 'cs' %}">CS</a><br>
-    <a href="{% url 'danc' %}">DANC</a><br>
-    <a href="{% url 'dem' %}">DEM</a><br>
-    <a href="{% url 'dh' %}">DH</a><br>
-    <a href="{% url 'dram' %}">DRAM</a><br>
-    <a href="{% url 'ds' %}">DS</a><br>
-    <a href="{% url 'ealc' %}">EALC</a><br>
-    <a href="{% url 'east' %}">EAST</a><br>
-    <a href="{% url 'ece' %}">ECE</a><br>
-    <a href="{% url 'econ' %}">ECON</a><br>
-    <a href="{% url 'edhs' %}">EDHS</a><br>
-    <a href="{% url 'edis' %}">EDIS</a><br>
-    <a href="{% url 'edlf' %}">EDLF</a><br>
-    <a href="{% url 'ednc' %}">EDNC</a><br>
-    <a href="{% url 'egmt' %}">EGMT</a><br>
-    <a href="{% url 'ela' %}">ELA</a><br>
-    <a href="{% url 'encw' %}">ENCW</a><br>
-    <a href="{% url 'engl' %}">ENGL</a><br>
-    <a href="{% url 'engr' %}">ENGR</a><br>
-    <a href="{% url 'entp' %}">ENTP</a><br>
-    <a href="{% url 'enwr' %}">ENWR</a><br>
-    <a href="{% url 'esl' %}">ESL</a><br>
-    <a href="{% url 'etp' %}">ETP</a><br>
-    <a href="{% url 'eurs' %}">EURS</a><br>
-    <a href="{% url 'evat' %}">EVAT</a><br>
-    <a href="{% url 'evec' %}">EVEC</a><br>
-    <a href="{% url 'evge' %}">EVGE</a><br>
-    <a href="{% url 'evhy' %}">EVHY</a><br>
-    <a href="{% url 'evsc' %}">EVSC</a><br>
-    <a href="{% url 'fren' %}">FREN</a><br>
-    <a href="{% url 'gbac' %}">GBAC</a><br>
-    <a href="{% url 'gbus' %}">GBUS</a><br>
-    <a href="{% url 'gccs' %}">GCCS</a><br>
-    <a href="{% url 'gcnl' %}">GCNL</a><br>
-    <a href="{% url 'gcom' %}">GCOM</a><br>
-    <a href="{% url 'gds' %}">GDS</a><br>
-    <a href="{% url 'germ' %}">GERM</a><br>
-    <a href="{% url 'getr' %}">GETR</a><br>
-    <a href="{% url 'ghss' %}">GHSS</a><br>
-    <a href="{% url 'gnur' %}">GNUR</a><br>
-    <a href="{% url 'gree' %}">GREE</a><br>
-    <a href="{% url 'gsas' %}">GSAS</a><br>
-    <a href="{% url 'gsci' %}">GSCI</a><br>
-    <a href="{% url 'gsgs' %}">GSGS</a><br>
-    <a href="{% url 'gsms' %}">GSMS</a><br>
-    <a href="{% url 'gssj' %}">GSSJ</a><br>
-    <a href="{% url 'gsvs' %}">GSVS</a><br>
-    <a href="{% url 'hbio' %}">HBIO</a><br>
-    <a href="{% url 'hebr' %}">HEBR</a><br>
-    <a href="{% url 'hhe' %}">HHE</a><br>
-    <a href="{% url 'hiaf' %}">HIAF</a><br>
-    <a href="{% url 'hiea' %}">HIEA</a><br>
-    <a href="{% url 'hieu' %}">HIEU</a><br>
-    <a href="{% url 'hila' %}">HILA</a><br>
-    <a href="{% url 'hime' %}">HIME</a><br>
-    <a href="{% url 'hind' %}">HIND</a><br>
-    <a href="{% url 'hisa' %}">HISA</a><br>
-    <a href="{% url 'hist' %}">HIST</a><br>
-    <a href="{% url 'hius' %}">HIUS</a><br>
-    <a href="{% url 'hr' %}">HR</a><br>
-    <a href="{% url 'hsci' %}">HSCI</a><br>
-    <a href="{% url 'imp' %}">IMP</a><br>
-    <a href="{% url 'inst' %}">INST</a><br>
-    <a href="{% url 'isbu' %}">ISBU</a><br>
-    <a href="{% url 'ishu' %}">ISHU</a><br>
-    <a href="{% url 'isin' %}">ISIN</a><br>
-    <a href="{% url 'isls' %}">ISLS</a><br>
-    <a href="{% url 'isss' %}">ISSS</a><br>
-    <a href="{% url 'it' %}">IT</a><br>
-    <a href="{% url 'ital' %}">ITAL</a><br>
-    <a href="{% url 'ittr' %}">ITTR</a><br>
-    <a href="{% url 'japn' %}">JAPN</a><br>
-    <a href="{% url 'jptr' %}">JPTR</a><br>
-    <a href="{% url 'kich' %}">KICH</a><br>
-    <a href="{% url 'kine' %}">KINE</a><br>
-    <a href="{% url 'klpa' %}">KLPA</a><br>
-    <a href="{% url 'kor' %}">KOR</a><br>
-    <a href="{% url 'lar' %}">LAR</a><br>
-    <a href="{% url 'lase' %}">LASE</a><br>
-    <a href="{% url 'last' %}">LAST</a><br>
-    <a href="{% url 'lati' %}">LATI</a><br>
-    <a href="{% url 'law' %}">LAW</a><br>
-    <a href="{% url 'ling' %}">LING</a><br>
-    <a href="{% url 'lngs' %}">LNGS</a><br>
-    <a href="{% url 'lppa' %}">LPPA</a><br>
-    <a href="{% url 'lppl' %}">LPPL</a><br>
-    <a href="{% url 'lppp' %}">LPPP</a><br>
-    <a href="{% url 'lpps' %}">LPPS</a><br>
-    <a href="{% url 'mae' %}">MAE</a><br>
-    <a href="{% url 'math' %}">MATH</a><br>
-    <a href="{% url 'mdst' %}">MDST</a><br>
-    <a href="{% url 'med' %}">MED</a><br>
-    <a href="{% url 'mesa' %}">MESA</a><br>
-    <a href="{% url 'micr' %}">MICR</a><br>
-    <a href="{% url 'misc' %}">MISC</a><br>
-    <a href="{% url 'mse' %}">MSE</a><br>
-    <a href="{% url 'msp' %}">MSP</a><br>
-    <a href="{% url 'mubd' %}">MUBD</a><br>
-    <a href="{% url 'muen' %}">MUEN</a><br>
-    <a href="{% url 'mupf' %}">MUPF</a><br>
-    <a href="{% url 'musi' %}">MUSI</a><br>
-    <a href="{% url 'nasc' %}">NASC</a><br>
-    <a href="{% url 'ncpr' %}">NCPR</a><br>
-    <a href="{% url 'nesc' %}">NESC</a><br>
-    <a href="{% url 'nuco' %}">NUCO</a><br>
-    <a href="{% url 'nuip' %}">NUIP</a><br>
-    <a href="{% url 'nurs' %}">NURS</a><br>
-    <a href="{% url 'path' %}">PATH</a><br>
-    <a href="{% url 'pc' %}">PC</a><br>
-    <a href="{% url 'pers' %}">PERS</a><br>
-    <a href="{% url 'petr' %}">PETR</a><br>
-    <a href="{% url 'phar' %}">PHAR</a><br>
-    <a href="{% url 'phil' %}">PHIL</a><br>
-    <a href="{% url 'phs' %}">PHS</a><br>
-    <a href="{% url 'phy' %}">PHY</a><br>
-    <a href="{% url 'phys' %}">PHYS</a><br>
-    <a href="{% url 'plac' %}">PLAC</a><br>
-    <a href="{% url 'plad' %}">PLAD</a><br>
-    <a href="{% url 'plan' %}">PLAN</a><br>
-    <a href="{% url 'plap' %}">PLAP</a><br>
-    <a href="{% url 'plcp' %}">PLCP</a><br>
-    <a href="{% url 'plir' %}">PLIR</a><br>
-    <a href="{% url 'plpt' %}">PLPT</a><br>
-    <a href="{% url 'pol' %}">POL</a><br>
-    <a href="{% url 'port' %}">PORT</a><br>
-    <a href="{% url 'potr' %}">POTR</a><br>
-    <a href="{% url 'ppl' %}">PPL</a><br>
-    <a href="{% url 'pshm' %}">PSHM</a><br>
-    <a href="{% url 'pslp' %}">PSLP</a><br>
-    <a href="{% url 'pspa' %}">PSPA</a><br>
-    <a href="{% url 'pspm' %}">PSPM</a><br>
-    <a href="{% url 'psps' %}">PSPS</a><br>
-    <a href="{% url 'pst' %}">PST</a><br>
-    <a href="{% url 'psyc' %}">PSYC</a><br>
-    <a href="{% url 'rela' %}">RELA</a><br>
-    <a href="{% url 'relb' %}">RELB</a><br>
-    <a href="{% url 'relc' %}">RELC</a><br>
-    <a href="{% url 'relg' %}">RELG</a><br>
-    <a href="{% url 'relh' %}">RELH</a><br>
-    <a href="{% url 'reli' %}">RELI</a><br>
-    <a href="{% url 'relj' %}">RELJ</a><br>
-    <a href="{% url 'rels' %}">RELS</a><br>
-    <a href="{% url 'russ' %}">RUSS</a><br>
-    <a href="{% url 'rutr' %}">RUTR</a><br>
-    <a href="{% url 'sans' %}">SANS</a><br>
-    <a href="{% url 'sarc' %}">SARC</a><br>
-    <a href="{% url 'sast' %}">SAST</a><br>
-    <a href="{% url 'satr' %}">SATR</a><br>
-    <a href="{% url 'sec' %}">SEC</a><br>
-    <a href="{% url 'slav' %}">SLAV</a><br>
-    <a href="{% url 'sltr' %}">SLTR</a><br>
-    <a href="{% url 'soc' %}">SOC</a><br>
-    <a href="{% url 'span' %}">SPAN</a><br>
-    <a href="{% url 'stat' %}">STAT</a><br>
-    <a href="{% url 'sts' %}">STS</a><br>
-    <a href="{% url 'swah' %}">SWAH</a><br>
-    <a href="{% url 'sys' %}">SYS</a><br>
-    <a href="{% url 'turk' %}">TURK</a><br>
-    <a href="{% url 'ud' %}">UD</a><br>
-    <a href="{% url 'unst' %}">UNST</a><br>
-    <a href="{% url 'urdu' %}">URDU</a><br>
-    <a href="{% url 'usem' %}">USEM</a><br>
-    <a href="{% url 'wgs' %}">WGS</a>
-    <!--<p>{{ data }}</p>-->
+  
+  <div class="accordion" id="ArtsAndSciencesDepartments">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingOne">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Arts & Science Departments
+        </button>
+      </h2>
+      <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#ArtsAndSciencesDepartments">
+        <div class="accordion-body">
+          <a href="{% url 'swah' %}">African-American and African Studies - Swahili</a><br>
+          <a href="{% url 'amst' %}">American Studies</a><br>
+          <a href="{% url 'anth' %}">Anthropology</a><br>
+          <a href="{% url 'arab' %}">Arabic</a><br>
+          <a href="{% url 'artr' %}">Arabic in Translation</a><br>
+          <a href="{% url 'arad' %}">Arts - Arts Administration</a><br>
+          <a href="{% url 'arah' %}">Arts - History of Art and Architecture</a><br>
+          <a href="{% url 'arth' %}">Arts - History of Art</a><br>
+          <a href="{% url 'arts' %}">Arts - Studio Art</a><br>
+          <a href="{% url 'astr' %}">Astronomy</a><br>
+          <a href="{% url 'biol' %}">Biology</a><br>
+          <a href="{% url 'hbio' %}">Bio - Human Biology</a><br>
+          <a href="{% url 'chem' %}">Chemistry</a><br>
+          <a href="{% url 'chin' %}">Chinese</a><br>
+          <a href="{% url 'chtr' %}">Chinese in Translation</a><br>
+          <a href="{% url 'clas' %}">Classics</a><br>
+          <a href="{% url 'gree' %}">Classics - Greek</a><br>
+          <a href="{% url 'lati' %}">Classics - Latin</a><br>
+          <a href="{% url 'creo' %}">Creole</a><br>
+          <a href="{% url 'danc' %}">Drama - Dance</a><br>
+          <a href="{% url 'dram' %}">Drama</a><br>
+          <a href="{% url 'ealc' %}">East Asian Languages, Literatures, and Cultures</a><br>
+          <a href="{% url 'east' %}">East Asian Studies</a><br>
+          <a href="{% url 'econ' %}">Economics</a><br>
+          <a href="{% url 'encw' %}">English - Creative Writing</a><br>
+          <a href="{% url 'engl' %}">English - Literature</a><br>
+          <a href="{% url 'enwr' %}">English - Writing and Rhetoric</a><br>
+          <a href="{% url 'evat' %}">Environmental Sciences-Atmospheric Sciences</a><br>
+          <a href="{% url 'evec' %}">Environmental Sciences-Ecology</a><br>
+          <a href="{% url 'evge' %}">Environmental Sciences-Geosciences</a><br>
+          <a href="{% url 'evhy' %}">Environmental Sciences-Hydrology</a><br>
+          <a href="{% url 'evsc' %}">Environmental Sciences</a><br>
+          <a href="{% url 'fren' %}">French</a><br>
+          <a href="{% url 'germ' %}">German</a><br>
+          <a href="{% url 'getr' %}">German in Translation</a><br>
+          <a href="{% url 'hebr' %}">Hebrew</a><br>
+          <a href="{% url 'hind' %}">Hindu</a><br>
+          <a href="{% url 'hiaf' %}">History-African History</a><br>
+          <a href="{% url 'hiea' %}">History-East Asian History</a><br>
+          <a href="{% url 'hieu' %}">History-European History</a><br>
+          <a href="{% url 'hila' %}">History-Latin American History</a><br>
+          <a href="{% url 'hime' %}">History-Middle Eastern History</a><br>
+          <a href="{% url 'hisa' %}">History-South Asian History</a><br>
+          <a href="{% url 'hist' %}">History-General History</a><br>
+          <a href="{% url 'hius' %}">History-US History</a><br>
+          <a href="{% url 'msp' %}">History-Medieval History</a><br>
+          <a href="{% url 'ital' %}">Italian</a><br>
+          <a href="{% url 'ittr' %}">Italian in Translation</a><br>
+          <a href="{% url 'japn' %}">Japanese</a><br>
+          <a href="{% url 'jptr' %}">Japanese in Translation</a><br>
+          <a href="{% url 'kor' %}">Korean</a><br>
+          <a href="{% url 'math' %}">Mathematics</a><br>
+          <a href="{% url 'kich' %}">Maya K'iche</a><br>
+          <a href="{% url 'mdst' %}">Media Studies</a><br>
+          <a href="{% url 'mesa' %}">Middle Eastern & South Asian Languages & Cultures</a><br>
+          <a href="{% url 'mubd' %}">Music - Marching Band</a><br>
+          <a href="{% url 'muen' %}">Music - Ensembles</a><br>
+          <a href="{% url 'mupf' %}">Music - Private Performance Instruction</a><br>
+          <a href="{% url 'musi' %}">Music</a><br>
+          <a href="{% url 'pers' %}">Persian</a><br>
+          <a href="{% url 'petr' %}">Persian in Translation</a><br>
+          <a href="{% url 'phil' %}">Philosophy</a><br>
+          <a href="{% url 'phys' %}">Physics</a><br>
+          <a href="{% url 'pol' %}">Polish</a><br>
+          <a href="{% url 'plad' %}">Politics - Departmental Seminar</a><br>
+          <a href="{% url 'plap' %}">Politics - American</a><br>
+          <a href="{% url 'plcp' %}">Politics - Comparative</a><br>
+          <a href="{% url 'plir' %}">Politics - International</a><br>
+          <a href="{% url 'plpt' %}">Politics - Theory</a><br>
+          <a href="{% url 'port' %}">Portuguese</a><br>
+          <a href="{% url 'potr' %}">Portuguese in Translation</a><br>
+          <a href="{% url 'phs' %}">Public Health Sciences</a><br>
+          <a href="{% url 'psyc' %}">Psychology</a><br>
+          <a href="{% url 'rela' %}">Religion - African Religions</a><br>
+          <a href="{% url 'relb' %}">Religion - Buddhism</a><br>
+          <a href="{% url 'relc' %}">Religion - Christianity</a><br>
+          <a href="{% url 'relg' %}">Religion - General</a><br>
+          <a href="{% url 'relh' %}">Religion - Hinduism</a><br>
+          <a href="{% url 'reli' %}">Religion - Islam</a><br>
+          <a href="{% url 'relj' %}">Religion - Judaism</a><br>
+          <a href="{% url 'rels' %}">Religion - Others</a><br>
+          <a href="{% url 'russ' %}">Russian</a><br>
+          <a href="{% url 'rutr' %}">Russian in Translation</a><br>
+          <a href="{% url 'sans' %}">Sanskirt</a><br>
+          <a href="{% url 'slav' %}">Slavic</a><br>
+          <a href="{% url 'sltr' %}">Slavic in Translation</a><br>
+          <a href="{% url 'soc' %}">Sociology</a><br>
+          <a href="{% url 'sast' %}">South Asian Studies</a><br>
+          <a href="{% url 'satr' %}">South Asian Literature in Translation</a><br>
+          <a href="{% url 'span' %}">Spanish</a><br>
+          <a href="{% url 'stat' %}">Statistics</a><br>
+          <a href="{% url 'turk' %}">Turkish</a><br>
+          <a href="{% url 'urdu' %}">Urdu</a><br>
+          <a href="{% url 'wgs' %}">Women and Gender Studies</a><br>
+        </div>
+      </div>
+    </div>
 
+  <div class="accordion" id="ArtsAndSciencesProgramsSeminarsInstitutes">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingTwo">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+          Additional Arts & Science Programs, Seminars, and Institutes
+        </button>
+      </h2>
+      <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#ArtsAndSciencesProgramsSeminarsInstitutes">
+        <div class="accordion-body">
+          <a href="{% url 'asl' %}">American Sign Language</a><br>
+          <a href="{% url 'arcy' %}">Archaeology</a><br>
+          <a href="{% url 'cogs' %}">Cognitive Science</a><br>
+          <a href="{% url 'cola' %}">College Advising Seminar</a><br>
+          <a href="{% url 'cs' %}">Computer Science</a><br>
+          <a href="{% url 'encw' %}">Creative Writing</a><br>
+          <a href="{% url 'ela' %}">Engaging the Liberal Arts</a><br>
+          <a href="{% url 'etp' %}">Enviromental Thought and Practice</a><br>
+          <a href="{% url 'eurs' %}">European Studies</a><br>
+          <a href="{% url 'gds' %}">Global Development Studies</a><br>
+          <a href="{% url 'gsgs' %}">Global Studies</a><br>
+          <a href="{% url 'gsms' %}">Global Studies - East and South Asia</a><br>
+          <a href="{% url 'gssj' %}">Global Studies - Security and Justice</a><br>
+          <a href="{% url 'gsvs' %}">Global Studies - Enviroments and Sustainability</a><br>
+          <a href="{% url 'ghss' %}">Graduate Humanities and Social Sciences</a><br>
+          <a href="{% url 'inst' %}">Interdisciplinary Studies</a><br>
+          <a href="{% url 'lase' %}">Liberal Arts Seminar</a><br>
+          <a href="{% url 'ling' %}">Linguistics</a><br>
+          <a href="{% url 'lngs' %}">Linguistics - General</a><br>
+          <a href="{% url 'msp' %}">Medieval Studies</a><br>
+          <a href="{% url 'nesc' %}">Neuroscience</a><br>
+          <a href="{% url 'ppl' %}">Political Philosophy, Policy, and Law</a><br>
+          <a href="{% url 'pst' %}">Political and Social Thought</a><br>
+          <a href="{% url 'usem' %}">University Seminars</a><br>
+        </div>
+      </div>
+    </div>
+    
+  <div class="accordion" id="ArtsAndSciencesCurriculumAndRequirements">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingThree">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+          Arts & Science Curriculum and Requirements
+        </button>
+      </h2>
+      <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#ArtsAndSciencesCurriculumAndRequirements">
+        <div class="accordion-body">
+          <a href="{% url 'egmt' %}">Engagements</a><br>
+          <a href="">Further to be Determined</a><br>
+        </div>
+      </div>
+    </div>
 
+  <div class="accordion" id="Engineering">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingFour">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+          Engineering and Applied Sciences Departments
+        </button>
+      </h2>
+      <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#Engineering">
+        <div class="accordion-body">
+          <a href="{% url 'apma' %}">Applied Mathematics</a><br>
+          <a href="{% url 'bme' %}">Biomedical Engineering</a><br>
+          <a href="{% url 'che' %}">Chemical Engineering</a><br>
+          <a href="{% url 'ce' %}">Civil & Enviromental Engineering</a><br>
+          <a href="{% url 'cs' %}">Computer Science</a><br>
+          <a href="{% url 'engr' %}">Cross-Disciplinary</a><br>
+          <a href="{% url 'cpe' %}">Computer Engineering</a><br>
+          <a href="{% url 'ece' %}">Electrical Engineering</a><br>
+          <a href="{% url 'mse' %}">Material Science and Engineering</a><br>
+          <a href="{% url 'mae' %}">Mechanical & Aerospace Engineering</a><br>
+          <a href="{% url 'sys' %}">Systems & Information Engineering</a><br>
+        </div>
+      </div>
+    </div>
+
+  <div class="accordion" id="SchoolOfEducation">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingFive">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+          School of Education and Human Development Departments
+        </button>
+      </h2>
+      <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#SchoolOfEducation">
+        <div class="accordion-body">
+          <a href="{% url 'edhs' %}">Human Services</a><br>
+          <a href="{% url 'edis' %}">Curriculum, Instruction, and Special Education</a><br>
+          <a href="{% url 'edlf' %}">Leadership, Foundations, and Policy</a><br>
+          <a href="{% url 'kine' %}">Kinesiology</a><br>
+        </div>
+      </div>
+    </div>
+  
+  <div class="accordion" id="GradSchool">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingSix">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+          School of Continuing and Professional Studies
+        </button>
+      </h2>
+      <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#GradSchool">
+        <div class="accordion-body">
+          <a href="{% url 'isbu' %}">Interdisciplinary Studies - Business</a><br>
+          <a href="{% url 'ishu' %}">Interdisciplinary Studies - Humanities</a><br>
+          <a href="{% url 'isin' %}">Interdisciplinary Studies - Individualized Other</a><br>
+          <a href="{% url 'isls' %}">Interdisciplinary Studies - Liberal Studies Seminar</a><br>
+          <a href="{% url 'isss' %}">Interdisciplinary Studies - Social Sciences</a><br>
+          <a href="{% url 'pshm' %}">Professional Studies - Health Sciences Management</a><br>
+
+          <a href="{% url 'acct' %}">Accounting - Graduate</a><br>
+          <a href="{% url 'ncpr' %}">Certified Financial Planning-Noncredit</a><br>
+          <a href="{% url 'sec' %}">Cyber Security Analysis - Undergraduate</a><br>
+          <a href="{% url 'bus' %}">Cyber Security Management - Graduate</a><br>
+          <a href="{% url 'hr' %}">Leadership in Human Resources Management - Undergraduate</a><br>
+          <a href="{% url 'it' %}">Information Technology - Graduate and Undergraduate</a><br>
+          <a href="{% url 'pc' %}">Procurement and Contracts Management - Graduate</a><br>
+          <a href="{% url 'pslp' %}">Leadership - Graduate</a><br>
+          <a href="{% url 'pspa' %}">Public Administration - Graduate</a><br>
+          <a href="{% url 'pspm' %}">Project Management - Graduate</a><br>
+        </div>
+      </div>
+    </div>
+  
+  <div class="accordion" id="OtherSchools">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingSeven">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+          Other Schools at the University of Virginia
+        </button>
+      </h2>
+      <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#OtherSchools">
+        <div class="accordion-body">
+          <a href="{% url 'alar' %}">Architecture and Landscape Architecture</a><br>
+          <a href="{% url 'arah' %}">Architecture and Art History</a><br>
+          <a href="{% url 'arch' %}">Architecture</a><br>
+          <a href="{% url 'arh' %}">Architectural History</a><br>
+          <a href="{% url 'lar' %}">Architecture - Landscape</a><br>
+          <a href="{% url 'plac' %}">Architecture - Planning Application</a><br>
+          <a href="{% url 'plan' %}">Architecture - Urban and Enviromental Planning</a><br>
+          <a href="{% url 'sarc' %}">A-School</a><br>
+          <a href="{% url 'gbus' %}">Business (Dardan School)</a><br>
+          <a href="{% url 'comm' %}">Commerce (McIntire School)</a><br>
+          <a href="{% url 'gcom' %}">Commerce (McIntire School) - Graduate</a><br>
+          <a href="{% url 'ds' %}">Data Science</a><br>
+          <a href="{% url 'am' %}">Engineering and Applied Sciences - Mechanics</a><br>
+          <a href="{% url 'entp' %}">Entrepreneurship</a><br>
+          <a href="{% url 'law' %}">Law School</a><br>
+          <a href="{% url 'bims' %}">Medical School - Biomedical Sciences</a><br>
+          <a href="{% url 'bioc' %}">Medical School - Biochemistry</a><br>
+          <a href="{% url 'biop' %}">Medical School - Biophysics</a><br>
+          <a href="{% url 'cell' %}">Medical School - Cell Biology</a><br>
+          <a href="{% url 'med' %}">Medical School - Medicine</a><br>
+          <a href="{% url 'micr' %}">Medical School - Microbiology</a><br>
+          <a href="{% url 'path' %}">Medical School - Pathology</a><br>
+          <a href="{% url 'phar' %}">Medical School - Pharmacology</a><br>
+          <a href="{% url 'phy' %}">Medical School - Physiology</a><br>
+          <a href="{% url 'nurs' %}">Nursing School - Nursing</a><br>
+          <a href="{% url 'nuip' %}">Nursing School - Interprofessional</a><br>
+          <a href="{% url 'nuco' %}">Nursing School - Core</a><br>
+          <a href="{% url 'gnur' %}">Nursing School - Grad</a><br>
+          <a href="{% url 'gcnl' %}">Nursing School - Clinical Leader</a><br>
+          <a href="{% url 'lppa' %}">Batten School - Evaluation and Analysis</a><br>
+          <a href="{% url 'lppl' %}">Batten School - Leadership</a><br>
+          <a href="{% url 'lppp' %}">Batten School - Policy</a><br>
+          <a href="{% url 'lpps' %}">Batten School - Substantive</a><br>
+          <a href="{% url 'unst' %}">University Studies</a><br>
+        </div>
+      </div>
+    </div>
+  
+  <div class="accordion" id="OtherProgramsSeminarsInstitutes">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingEight">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
+          Other Programs, Seminars, and Institutes
+        </button>
+      </h2>
+      <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight" data-bs-parent="#OtherProgramsSeminarsInstitutes">
+        <div class="accordion-body">
+          <a href="{% url 'airs' %}">Air Science</a><br>
+          <a href="{% url 'misc' %}">Military Science</a><br>
+          <a href="{% url 'nasc' %}">Naval Science</a><br>
+          <a href="{% url 'unst' %}">University Studies</a><br>
+        </div>
+      </div>
+    </div>
 </html>
