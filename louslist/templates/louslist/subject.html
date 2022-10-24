@@ -1,14 +1,33 @@
 <!DOCTYPE html>
+
 <html lang="en">
+  {% load bootstrap5 %} {% bootstrap_css %}
   <body>
     <h1>{{ subject }}</h1>
-    {% load stringfilters %}
-    {% for i in data%}
-        {{ i.subject }}{{ i.catalog_number }} &nbsp;&nbsp; {{ '|' }}&nbsp;&nbsp;{{ i.description }}&nbsp;&nbsp;{{ '|' }}&nbsp;&nbsp;{{ i.component }}&nbsp;&nbsp;
-        {{ '|' }} &nbsp;&nbsp; {{ 'Total Enrollment:' }} &nbsp; {{ i.enrollment_total }} {{ '/' }} {{ i.class_capacity }}
-        {{ '|' }} &nbsp;&nbsp; {{ 'Meeting Days:' }} &nbsp; {{ i.meetings.0.days }}
-        {{ '|' }} &nbsp;&nbsp; {{ 'Meeting Time:' }} &nbsp; {{ i.meetings.0.start_time|time_beautifier }} {{ ' - ' }}
-        {{ i.meetings.0.end_time|time_beautifier }} <br>
-    {% endfor %}
+    <table class="table table-striped table-dark">
+      <thead>
+        <tr>
+          <th scope="col">Subject</th>
+          <th scope="col">description</th>
+          <th scope="col">Component</th>
+          <th scope="col">Total Enrollment</th>
+          <th scope="col">Meeting Days</th>
+          <th scope="col">Meeting Time</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% load stringfilters %}
+      {% for i in data%}
+        <tr>
+          <th scope="row">{{ i.subject }}{{ i.catalog_number }}</th>
+          <td>{{ i.description }}</td>
+          <td>{{ i.component }}</td>
+          <td>{{ i.enrollment_total }} {{ '/' }} {{ i.class_capacity }}</td>
+          <td>{{ i.meetings.0.days }}</td>
+          <td>{{ i.meetings.0.start_time|time_beautifier }} {{ ' - ' }}
+            {{ i.meetings.0.end_time|time_beautifier }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
   </body>
 </html>
