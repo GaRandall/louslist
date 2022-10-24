@@ -12,7 +12,7 @@
 <html>
   <body>
     <h1>UVA Class Schedules</h1>
-    {% if user.is_authenticated %}
+    {% if request.user.is_authenticated %}
     <p>Welcome! You are logged in as {{ user.username }}</p>
     {% else %}
     <a href="{% provider_login_url 'google' %}">Login With Google</a>
@@ -125,6 +125,7 @@
         </div>
       </div>
     </div>
+  </div>
 
   <div class="accordion" id="ArtsAndSciencesProgramsSeminarsInstitutes">
     <div class="accordion-item">
@@ -162,6 +163,7 @@
         </div>
       </div>
     </div>
+  </div>
     
   <div class="accordion" id="ArtsAndSciencesCurriculumAndRequirements">
     <div class="accordion-item">
@@ -177,6 +179,7 @@
         </div>
       </div>
     </div>
+  </div>
 
   <div class="accordion" id="Engineering">
     <div class="accordion-item">
@@ -201,6 +204,7 @@
         </div>
       </div>
     </div>
+  </div>
 
   <div class="accordion" id="SchoolOfEducation">
     <div class="accordion-item">
@@ -218,6 +222,7 @@
         </div>
       </div>
     </div>
+  </div>
   
   <div class="accordion" id="GradSchool">
     <div class="accordion-item">
@@ -248,6 +253,7 @@
         </div>
       </div>
     </div>
+  </div>
   
   <div class="accordion" id="OtherSchools">
     <div class="accordion-item">
@@ -295,6 +301,7 @@
         </div>
       </div>
     </div>
+  </div>
   
   <div class="accordion" id="OtherProgramsSeminarsInstitutes">
     <div class="accordion-item">
@@ -312,4 +319,5 @@
         </div>
       </div>
     </div>
+  </div>
 </html>
