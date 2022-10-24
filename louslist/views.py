@@ -15,6 +15,7 @@ def home(request):
 
 
 def departments(request):
+    print(request.path_info)
     path = request.path_info
     department = path[1:].upper()
 
