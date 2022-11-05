@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import requests
 from django.urls import reverse
+from django.contrib.auth import logout
+from django.http import HttpResponseRedirect
 
 
 # Create your views here.
@@ -26,3 +28,8 @@ def departments(request):
         'subject': department
     }
     return render(request, 'louslist/subject.html', context)
+
+
+#def LogoutView(request):
+ #   logout(request)
+  #  return HttpResponseRedirect('')
