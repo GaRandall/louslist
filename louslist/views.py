@@ -16,16 +16,14 @@ def home(request):
     return render(request, 'louslist/index.html', context)
 
 
-def departments(request):
+def departments(request, dept):
     print(request.path_info)
-    path = request.path_info
-    department = path[1:].upper()
 
-    data = requests.get("http://luthers-list.herokuapp.com/api/dept/" + department + "/?format=json").json()
+    data = requests.get("http://luthers-list.herokuapp.com/api/dept/" + dept.upper() + "/?format=json").json()
 
     context = {
         'data': data,
-        'subject': department
+        'subject': dept
     }
     return render(request, 'louslist/subject.html', context)
 
