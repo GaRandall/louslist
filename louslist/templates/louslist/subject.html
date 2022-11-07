@@ -20,7 +20,7 @@
       {% for i in data%}
         <tr>
           <th scope="row">{{ i.subject }}{{ i.catalog_number }}</th>
-          <td>{{ i.description }}</td>
+          <td><a href="{% url 'course' subject i.catalog_number %}">{{ i.description }}</a></td>
           <td>{{ i.component }}</td>
           <td>{{ i.enrollment_total }} {{ '/' }} {{ i.class_capacity }}</td>
           <td>{{ i.meetings.0.days }}</td>

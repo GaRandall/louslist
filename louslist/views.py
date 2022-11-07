@@ -40,6 +40,13 @@ def departments(request, dept):
     }
     return render(request, 'louslist/subject.html', context)
 
+
+def course(request, dept, course_num):
+    context = {
+
+    }
+    return render(request, 'louslist/course.html', context)
+
 # def LogoutView(request):
 #   logout(request)
 #  return HttpResponseRedirect('')

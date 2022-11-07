@@ -6,5 +6,6 @@ register_converter(converters.DepartmentConverter, 'dID')
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('<str:dept>', views.departments, name='depts')
+    path('<str:dept>', views.departments, name='depts'),
+    path('<str:dept>/<int:course_num>', views.course, name='course')
 ]
