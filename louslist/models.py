@@ -9,6 +9,7 @@ from django.contrib.auth.models import AbstractUser
 class Dept(models.Model):
     subject = models.CharField(max_length=200,primary_key=True, db_column='subject_id')
 
+
 class Subject(models.Model):
     instructor=models.CharField(max_length=200)
     course_number=models.IntegerField(primary_key=True,db_column='subj_id')
