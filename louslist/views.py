@@ -48,7 +48,7 @@ def course(request, dept, course_num):
     for review in relevant_reviews:
         count += 1
         review_total += review.overall_rating
-        difficulty_total = review.difficulty_rating
+        difficulty_total += review.difficulty_rating
     if count > 0:
         review_avg_string = str(review_total / count)
         difficulty_avg_string = str(difficulty_total / count)
