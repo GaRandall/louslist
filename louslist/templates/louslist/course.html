@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load bootstrap5 %} {% bootstrap_css %}
+<body>
+<h1>{{ dept }}{{ course_num }}</h1>
+<h4>Avg review score: {{ review_avg }} ({{ review_count }} reviews)</h4>
+<h4> Avg difficulty score: {{ difficulty_avg }}</h4>
+Have you taken this class?<br>
+<a href="{% url 'newreview' dept course_num %}">Leave a review!</a>
+<br><br><br>
+<table>
+    <thead>
+    <tr>
+        <th scope="col">Reviewer Name</th>
+        <th scope="col">Overall Rating</th>
+        <th scope="col">Difficulty Rating</th>
+        <th scope="col">Review Title</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for review in reviews %}
+        <tr>
+        <th scope="row">{{ review.user_name }}</th>
+        <td>{{ review.overall_rating }}</td>
+        <td>{{ review.difficulty_rating }}</td>
+        <td><a href="{% url 'reviewdetail' dept course_num review.id %}">{{ review.review_title }}</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>

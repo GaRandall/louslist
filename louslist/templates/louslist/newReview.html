@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load bootstrap5 %} {% bootstrap_css %}
+<body>
+<h1>Leave a new review for {{ dept }}{{ course_num }}</h1>
+<br><br>
+{% if submitted %}
+Your review was successfully submitted! <br>
+    <a href="{% url 'course' dept course_num %}">Return to the course page</a>
+{% else %}
+<form action="" method=POST>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit" class="btn btn-success">
+</form>
+{% endif %}
+</body>
+</html>

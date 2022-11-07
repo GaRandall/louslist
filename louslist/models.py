@@ -30,10 +30,11 @@ class Subject(models.Model):
 
 
 class Review(models.Model):
-    review_id = models.IntegerField(primary_key=True)
     course_id = models.CharField(max_length=8)
     overall_rating = models.IntegerField()
     difficulty_rating = models.IntegerField()
+    user_name = models.CharField(max_length=50, default='anonymous')
     user_email = models.CharField(max_length=50)
     review_title = models.CharField(max_length=200)
     review_text = models.CharField(max_length=600)
+    review_date = models.DateTimeField(null=True)
