@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.conf import settings
 
 
 #class User(AbstractUser):
@@ -38,3 +39,12 @@ class Review(models.Model):
     review_title = models.CharField(max_length=200)
     review_text = models.CharField(max_length=600)
     review_date = models.DateTimeField(null=True)
+
+class UniqueUser(models.Model):
+    userID = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    userName = models.CharField(max_length=50)
+    userEmail = models.CharField(max_length=50)
+    userFriends = models.ManyToManyField("self", blank = True)
+
+    def __str__(self):
+        return self.userName

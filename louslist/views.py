@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect
 import requests
 from django.http import HttpResponseRedirect
 from .forms import NewReviewForm
-from .models import Dept, Subject, Review
+from .models import Dept, Subject, Review, UniqueUser
 from django.utils import timezone
+from django.urls import reverse
+from django.contrib.auth.models import User
 
 
 # Create your views here.
@@ -106,6 +108,14 @@ def review_detail(request, dept, course_num, review_id):
         'review': the_review
     }
     return render(request, 'louslist/reviewDetail.html', context)
+
+def add_user(request):
+    obj, created = UniqueUser.objects.get_or_create(
+        userID = request.user,
+        userName = request.user.username,
+        userEmail = request.user.email,
+    )
+    return HttpResponseRedirect(reverse('home'))
 
 # def LogoutView(request):
 #   logout(request)
