@@ -5,6 +5,7 @@ from .forms import NewReviewForm
 from .models import Dept, Subject, Review, UniqueUser
 from django.utils import timezone
 from django.urls import reverse
+import json
 from django.contrib.auth.models import User
 
 
@@ -109,14 +110,164 @@ def review_detail(request, dept, course_num, review_id):
     }
     return render(request, 'louslist/reviewDetail.html', context)
 
+
 def add_user(request):
     obj, created = UniqueUser.objects.get_or_create(
-        userID = request.user,
-        userName = request.user.username,
-        userEmail = request.user.email,
+        userID=request.user.id,
+        userName=request.user.username,
+        userEmail=request.user.email,
     )
     return HttpResponseRedirect(reverse('home'))
 
-# def LogoutView(request):
-#   logout(request)
-#  return HttpResponseRedirect('')
+
+def add_class(request, dept, course_num, section):
+    user, created = UniqueUser.objects.get_or_create(
+        userID=request.user.id,
+        userName=request.user.username,
+        userEmail=request.user.email,
+    )
+    schedule = user.userSchedule.split()
+    for c in schedule:
+        if c == dept + '_' + str(course_num) + '_' + str(section):
+            return HttpResponseRedirect(reverse('depts', args=[dept]))
+    user.userSchedule += ' ' + dept + '_' + str(course_num) + '_' + str(section)
+    user.save()
+    return HttpResponseRedirect(reverse('depts', args=[dept.lower()]))
+
+
+def drop_class(request, dept, course_num, section):
+    user = UniqueUser.objects.get(userID=request.user.id)
+    schedule = user.userSchedule.split()
+    dropped = ""
+    for c in schedule:
+        if c == dept + '_' + str(course_num) + '_' + str(section):
+            dropped = c
+            break
+    if dropped != "":
+        schedule.remove(dropped)
+        new_schedule = ""
+        for c in schedule:
+            new_schedule += " " + c
+        user.userSchedule = new_schedule
+        user.save()
+    return HttpResponseRedirect(reverse('viewschedule'))
+
+
+def view_schedule(request):
+    user, created = UniqueUser.objects.get_or_create(
+        userID=request.user.id,
+        userName=request.user.username,
+        userEmail=request.user.email,
+    )
+    schedule = user.userSchedule.split()
+    monday = []
+    tuesday = []
+    wednesday = []
+    thursday = []
+    friday = []
+    saturday = []
+    sunday = []
+    for c in schedule:
+        dept = ""
+        course_num = ""
+        section = ""
+        count_spaces = 0
+        for letter in c:
+            if letter == '_':
+                count_spaces += 1
+            else:
+                if count_spaces == 0:
+                    dept += letter
+                elif count_spaces == 1:
+                    course_num += letter
+                elif count_spaces == 2:
+                    section += letter
+        dept_json = requests.get('http://luthers-list.herokuapp.com/api/dept/' + dept.upper() + '/?format=json').json()
+        meeting_days = ""
+        meeting_start = ""
+        meeting_end = ""
+        course_description = ""
+        location = ""
+        course_id = ""
+        subject = ""
+        catalog_number = ""
+        for cl in dept_json:
+            if str(cl['course_number']) == section:
+                subject = cl['subject']
+                catalog_number = cl['catalog_number']
+                course_id = cl['subject'] + cl['catalog_number']
+                meeting_days = cl['meetings'][0]['days']
+                meeting_start = cl['meetings'][0]['start_time']
+                meeting_end = cl['meetings'][0]['end_time']
+                course_description = cl['description']
+                location = cl['meetings'][0]['facility_description']
+        attributes = {
+            'course_id': course_id,
+            'course_description': course_description,
+            'meeting_start': meeting_start,
+            'meeting_end': meeting_end,
+            'location': location,
+            'subject': subject.lower(),
+            'catalog_number': catalog_number,
+            'section': section,
+        }
+        if "Mo" in meeting_days:
+            monday.append(attributes)
+        if "Tu" in meeting_days:
+            tuesday.append(attributes)
+        if "We" in meeting_days:
+            wednesday.append(attributes)
+        if "Th" in meeting_days:
+            thursday.append(attributes)
+        if "Fr" in meeting_days:
+            friday.append(attributes)
+        if "Sa" in meeting_days:
+            saturday.append(attributes)
+        if "Su" in meeting_days:
+            sunday.append(attributes)
+    monday.sort(key=_sort_times_)
+    tuesday.sort(key=_sort_times_)
+    wednesday.sort(key=_sort_times_)
+    thursday.sort(key=_sort_times_)
+    friday.sort(key=_sort_times_)
+    saturday.sort(key=_sort_times_)
+    sunday.sort(key=_sort_times_)
+    context = {
+        'monday': monday,
+        'tuesday': tuesday,
+        'wednesday': wednesday,
+        'thursday': thursday,
+        'friday': friday,
+        'saturday': saturday,
+        'sunday': sunday
+    }
+    print(monday)
+    print(tuesday)
+    print(wednesday)
+    print(thursday)
+    print(friday)
+    print(saturday)
+    print(sunday)
+    return render(request, 'louslist/schedule.html', context)
+
+
+def _sort_times_(course_dict):
+    time_string = course_dict['meeting_start']
+    hour_string = ""
+    minute_string = ""
+    count_dots = 0
+    for c in time_string:
+        if c == '.':
+            count_dots += 1
+        else:
+            if count_dots == 0:
+                hour_string += c
+            if count_dots == 1:
+                minute_string += 1
+            else:
+                break
+    if hour_string == "":
+        hour_string = "23"
+    if minute_string == "":
+        minute_string = "59"
+    return int(hour_string)*60 + int(minute_string)

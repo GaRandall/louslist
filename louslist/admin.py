@@ -11,7 +11,8 @@ class ReviewAdmin(admin.ModelAdmin):
     fields = ['course_id', 'overall_rating', 'difficulty_rating', 'user_name', 'user_email', 'review_title', 'review_text', 'review_date']
 
 class UniqueUserAdmin(admin.ModelAdmin):
-    fields = ['userID', 'userName', 'userEmail', 'userFriends']
+    fields = ['userID', 'userName', 'userEmail', 'userFriends', 'userSchedule']
+
 
 admin.site.register(Dept, DeptAdmin)
 admin.site.register(Subject, SubjectAdmin)
