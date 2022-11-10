@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load bootstrap5 %} {% bootstrap_css %}
+{% load stringfilters %}
+<body>
+<h1>{{ user.username }}'s schedule</h1>
+{% if monday %}
+    <h4>Monday</h4>
+    <table class="table table-striped table-light">
+    <thead>
+    <tr>
+        <th scope="col">Course Number</th>
+        <th scope="col">Course Title</th>
+        <th scope="col">Starts</th>
+        <th scope="col">Ends</th>
+        <th scope="col">Location</th>
+        <th scope="col">Drop?</th>
+    </tr>
+    </thead>
+    {% for c in monday %}
+        <tr>
+        <th scope="row">{{ c.course_id }}</th>
+        <td>{{ c.course_description }}</td>
+        <td>{{ c.meeting_start|time_beautifier }}</td>
+        <td>{{ c.meeting_end|time_beautifier }}</td>
+        <td>{{ c.location }}</td>
+        <td><a href="{% url 'dropclass' c.subject c.catalog_number c.section %}">Drop</a> </td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endif %}
+{% if tuesday %}
+    <h4>Tuesday</h4>
+    <table class="table table-striped table-light">
+    <thead>
+    <tr>
+        <th scope="col">Course Number</th>
+        <th scope="col">Course Title</th>
+        <th scope="col">Starts</th>
+        <th scope="col">Ends</th>
+        <th scope="col">Location</th>
+        <th scope="col">Drop?</th>
+    </tr>
+    </thead>
+    {% for c in tuesday %}
+        <tr>
+        <th scope="row">{{ c.course_id }}</th>
+        <td>{{ c.course_description }}</td>
+        <td>{{ c.meeting_start|time_beautifier }}</td>
+        <td>{{ c.meeting_end|time_beautifier }}</td>
+        <td>{{ c.location }}</td>
+        <td><a href="{% url 'dropclass' c.subject c.catalog_number c.section %}">Drop</a> </td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endif %}
+{% if wednesday %}
+    <h4>Wednesday</h4>
+    <table class="table table-striped table-light">
+    <thead>
+    <tr>
+        <th scope="col">Course Number</th>
+        <th scope="col">Course Title</th>
+        <th scope="col">Starts</th>
+        <th scope="col">Ends</th>
+        <th scope="col">Location</th>
+        <th scope="col">Drop?</th>
+    </tr>
+    </thead>
+    {% for c in wednesday %}
+        <tr>
+        <th scope="row">{{ c.course_id }}</th>
+        <td>{{ c.course_description }}</td>
+        <td>{{ c.meeting_start|time_beautifier }}</td>
+        <td>{{ c.meeting_end|time_beautifier }}</td>
+        <td>{{ c.location }}</td>
+        <td><a href="{% url 'dropclass' c.subject c.catalog_number c.section %}">Drop</a> </td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endif %}
+{% if thursday %}
+    <h4>Thursday</h4>
+    <table class="table table-striped table-light">
+    <thead>
+    <tr>
+        <th scope="col">Course Number</th>
+        <th scope="col">Course Title</th>
+        <th scope="col">Starts</th>
+        <th scope="col">Ends</th>
+        <th scope="col">Location</th>
+        <th scope="col">Drop?</th>
+    </tr>
+    </thead>
+    {% for c in thursday %}
+        <tr>
+        <th scope="row">{{ c.course_id }}</th>
+        <td>{{ c.course_description }}</td>
+        <td>{{ c.meeting_start|time_beautifier }}</td>
+        <td>{{ c.meeting_end|time_beautifier }}</td>
+        <td>{{ c.location }}</td>
+        <td><a href="{% url 'dropclass' c.subject c.catalog_number c.section %}">Drop</a> </td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endif %}
+{% if friday %}
+    <h4>Friday</h4>
+    <table class="table table-striped table-light">
+    <thead>
+    <tr>
+        <th scope="col">Course Number</th>
+        <th scope="col">Course Title</th>
+        <th scope="col">Starts</th>
+        <th scope="col">Ends</th>
+        <th scope="col">Location</th>
+        <th scope="col">Drop?</th>
+    </tr>
+    </thead>
+    {% for c in friday %}
+        <tr>
+        <th scope="row">{{ c.course_id }}</th>
+        <td>{{ c.course_description }}</td>
+        <td>{{ c.meeting_start|time_beautifier }}</td>
+        <td>{{ c.meeting_end|time_beautifier }}</td>
+        <td>{{ c.location }}</td>
+        <td><a href="{% url 'dropclass' c.subject c.catalog_number c.section %}">Drop</a> </td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endif %}
+{% if saturday %}
+    <h4>Saturday</h4>
+    <table class="table table-striped table-light">
+    <thead>
+    <tr>
+        <th scope="col">Course Number</th>
+        <th scope="col">Course Title</th>
+        <th scope="col">Starts</th>
+        <th scope="col">Ends</th>
+        <th scope="col">Location</th>
+        <th scope="col">Drop?</th>
+    </tr>
+    </thead>
+    {% for c in saturday %}
+        <tr>
+        <th scope="row">{{ c.course_id }}</th>
+        <td>{{ c.course_description }}</td>
+        <td>{{ c.meeting_start|time_beautifier }}</td>
+        <td>{{ c.meeting_end|time_beautifier }}</td>
+        <td>{{ c.location }}</td>
+        <td><a href="{% url 'dropclass' c.subject c.catalog_number c.section %}">Drop</a> </td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endif %}
+{% if sunday %}
+    <h4>Sunday</h4>
+    <table class="table table-striped table-light">
+    <thead>
+    <tr>
+        <th scope="col">Course Number</th>
+        <th scope="col">Course Title</th>
+        <th scope="col">Starts</th>
+        <th scope="col">Ends</th>
+        <th scope="col">Location</th>
+        <th scope="col">Drop?</th>
+    </tr>
+    </thead>
+    {% for c in sunday %}
+        <tr>
+        <th scope="row">{{ c.course_id }}</th>
+        <td>{{ c.course_description }}</td>
+        <td>{{ c.meeting_start|time_beautifier }}</td>
+        <td>{{ c.meeting_end|time_beautifier }}</td>
+        <td>{{ c.location }}</td>
+        <td><a href="{% url 'dropclass' c.subject.lower c.catalog_number c.section %}">Drop</a> </td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endif %}
+<a href="{% url 'home' %}">Return home</a>
+</body>
+</html>

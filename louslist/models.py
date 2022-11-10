@@ -3,17 +3,17 @@ from django.contrib.auth.models import AbstractUser
 from django.conf import settings
 
 
-#class User(AbstractUser):
+# class User(AbstractUser):
 #    courses=
 
 
 class Dept(models.Model):
-    subject = models.CharField(max_length=200,primary_key=True, db_column='subject_id')
+    subject = models.CharField(max_length=200, primary_key=True, db_column='subject_id')
 
 
 class Subject(models.Model):
     instructor = models.CharField(max_length=200)
-    course_number = models.IntegerField(primary_key=True,db_column='subj_id')
+    course_number = models.IntegerField(primary_key=True, db_column='subj_id')
     semester_code = models.IntegerField()
     course_section = models.CharField(max_length=200)
     subject = models.CharField(max_length=200)
@@ -40,11 +40,13 @@ class Review(models.Model):
     review_text = models.CharField(max_length=600)
     review_date = models.DateTimeField(null=True)
 
+
 class UniqueUser(models.Model):
-    userID = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    userID = models.IntegerField(primary_key=True)
     userName = models.CharField(max_length=50)
     userEmail = models.CharField(max_length=50)
-    userFriends = models.ManyToManyField("self", blank = True)
+    userFriends = models.CharField(max_length=500, default="")
+    userSchedule = models.CharField(max_length=500, default="")
 
     def __str__(self):
         return self.userName
