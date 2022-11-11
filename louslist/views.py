@@ -5,6 +5,7 @@ from .forms import NewReviewForm
 from .models import Dept, Subject, Review, UniqueUser
 from django.utils import timezone
 from django.urls import reverse
+from django.db.models import Q
 import json
 from django.contrib.auth.models import User
 
@@ -13,22 +14,44 @@ from django.contrib.auth.models import User
 
 def home(request):
     resp = requests.get('http://luthers-list.herokuapp.com/api/deptlist/?format=json').json()
-    # for key in resp:
-    #    dep = Dept(key['subject'])
-    #    dep.save()
-    # for x in Dept.objects.all():
-    #    print(x.subject)
-    #    res = requests.get("http://luthers-list.herokuapp.com/api/dept/" + x.subject + "/?format=json").json()
-    #    for a in res:
-    #        sub = Subject(a['instructor'], a['course_number'], a['semester_code'], a['course_section'], a['subject'],
-    #                      a['catalog_number'], a['description'], a['units'], a['component'], a['class_capacity'],
-    #                      a['wait_list'], a['wait_cap'], a['enrollment_total'], a['enrollment_available'], a['topic'],
-    #                      a['meetings'])
-    #        sub.save()
     context = {
         'data': resp
     }
     return render(request, 'louslist/index.html', context)
+
+
+def initialize(request):
+    resp = requests.get('http://luthers-list.herokuapp.com/api/deptlist/?format=json').json()
+    for key in resp:
+        dep = Dept(subject=key['subject'], js=resp)
+        dep.save()
+    for x in Dept.objects.all():
+        print(x.subject)
+        res = requests.get("http://luthers-list.herokuapp.com/api/dept/" + x.subject + "/?format=json").json()
+        for a in res:
+            sub = Subject(
+                instructor=a['instructor']['name'],
+                email=a['instructor']['email'],
+                course_number=a['course_number'],
+                semester_code=a['semester_code'],
+                course_section=a['course_section'],
+                subject=a['subject'],
+                catalog_number=a['catalog_number'],
+                description=a['description'],
+                units=a['units'],
+                component=a['component'],
+                class_capacity=a['class_capacity'],
+                wait_list=a['wait_list'],
+                wait_cap=a['wait_cap'],
+                enrollment_total=a['enrollment_total'],
+                enrollment_available=a['enrollment_available'],
+                topic=a['topic'],
+                days=a['meetings'][1]['days'],
+                start_time=a['meetings'][1]['start_time'],
+                end_time=a['meetings'][1]['end_time'],
+                facility_description=a['meetings'][1]['facility_description'])
+            sub.save()
+    return HttpResponseRedirect(reverse('home'))
 
 
 def departments(request, dept):
@@ -270,4 +293,37 @@ def _sort_times_(course_dict):
         hour_string = "23"
     if minute_string == "":
         minute_string = "59"
-    return int(hour_string)*60 + int(minute_string)
+    return int(hour_string) * 60 + int(minute_string)
+
+
+def searchbar(request):
+    return render(request, 'louslist/search.html')
+
+
+def result(request):
+    search_post = request.GET.get('search')
+    sub_post = request.GET.get('num')
+    inst_post = request.GET.get('inst')
+    ty_post = request.GET.get('ty')
+    bd_post = request.GET.get('bd')
+    rn_post = request.GET.get('rn')
+    dy_post = request.GET.get('dy')
+    tm_post = request.GET.get('tm')
+    posts = Subject.objects.all().order_by("subject")
+    if search_post:
+        posts = posts.filter(Q(subject__iexact=search_post)).order_by("catalog_number")
+    if sub_post:
+        posts = posts.filter(Q(catalog_number__icontains=sub_post))
+    if inst_post:
+        posts = posts.filter(Q(instructor__icontains=inst_post))
+    if ty_post:
+        posts = posts.filter(Q(component__icontains=ty_post))
+    if bd_post:
+        posts = posts.filter(Q(facility_description__icontains=bd_post))
+    if rn_post:
+        posts = posts.filter(Q(facility_description__icontains=rn_post))
+    if dy_post:
+        posts = posts.filter(Q(days__icontains=dy_post))
+    if tm_post:
+        posts = posts.filter(Q(start_time__icontains=tm_post) or Q(end_time__icontains=tm_post))
+    return render(request, 'louslist/result.html', {'posts': posts})
