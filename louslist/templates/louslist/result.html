@@ -10,6 +10,7 @@
 {% bootstrap_messages %}
 
 {% load socialaccount %}
+{% load stringfilters %}
 
 <html>
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
@@ -71,8 +72,8 @@
           <td>{{ i.component }}</td>
           <td>{{ i.enrollment_total }} {{ '/' }} {{ i.class_capacity }}</td>
           <td>{{ i.days }}</td>
-          <td>{{ i.start_time }} {{ ' - ' }}
-            {{ i.end_time }}</td>
+          <td>{{ i.start_time|time_beautifier }} {{ ' - ' }}
+            {{ i.end_time|time_beautifier }}</td>
           <td>{{ i.facility_description }}</td>
         </tr>
       {% endfor %}

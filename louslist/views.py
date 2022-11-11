@@ -29,6 +29,15 @@ def initialize(request):
         print(x.subject)
         res = requests.get("http://luthers-list.herokuapp.com/api/dept/" + x.subject + "/?format=json").json()
         for a in res:
+            days = ""
+            starting_time = ""
+            ending_time = ""
+            fac_description = ""
+            if a['meetings']:
+                days = a['meetings'][0]['days']
+                starting_time = a['meetings'][0]['start_time']
+                ending_time = a['meetings'][0]['end_time']
+                fac_description = a['meetings'][0]['facility_description']
             sub = Subject(
                 instructor=a['instructor']['name'],
                 email=a['instructor']['email'],
@@ -46,10 +55,10 @@ def initialize(request):
                 enrollment_total=a['enrollment_total'],
                 enrollment_available=a['enrollment_available'],
                 topic=a['topic'],
-                days=a['meetings'][1]['days'],
-                start_time=a['meetings'][1]['start_time'],
-                end_time=a['meetings'][1]['end_time'],
-                facility_description=a['meetings'][1]['facility_description'])
+                days=days,
+                start_time=starting_time,
+                end_time=ending_time,
+                facility_description=fac_description)
             sub.save()
     return HttpResponseRedirect(reverse('home'))
 
