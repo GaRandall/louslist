@@ -9,10 +9,12 @@ from django.conf import settings
 
 class Dept(models.Model):
     subject = models.CharField(max_length=200, primary_key=True, db_column='subject_id')
+    js = models.JSONField(default=dict)
 
 
 class Subject(models.Model):
     instructor = models.CharField(max_length=200)
+    email = models.CharField(max_length=200, default='x')
     course_number = models.IntegerField(primary_key=True, db_column='subj_id')
     semester_code = models.IntegerField()
     course_section = models.CharField(max_length=200)
@@ -27,7 +29,10 @@ class Subject(models.Model):
     enrollment_total = models.IntegerField()
     enrollment_available = models.IntegerField()
     topic = models.CharField(max_length=200)
-    meetings = models.CharField(max_length=200)
+    days = models.CharField(max_length=200, default='')
+    start_time = models.CharField(max_length=200, default='')
+    end_time = models.CharField(max_length=200, default='')
+    facility_description = models.CharField(max_length=200, default='')
 
 
 class Review(models.Model):
