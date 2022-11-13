@@ -8,6 +8,7 @@ from django.urls import reverse
 from django.db.models import Q
 import json
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -184,7 +185,7 @@ def drop_class(request, dept, course_num, section):
         user.save()
     return HttpResponseRedirect(reverse('viewschedule'))
 
-
+@login_required
 def view_schedule(request):
     user, created = UniqueUser.objects.get_or_create(
         userID=request.user.id,
