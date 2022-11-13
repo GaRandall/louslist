@@ -61,6 +61,7 @@
           <th scope="col">Meeting Days</th>
           <th scope="col">Meeting Time</th>
           <th scope="col">Location</th>
+          <th scope="col">Add this class?</th>
         </tr>
       </thead>
       <tbody>
@@ -75,6 +76,7 @@
           <td>{{ i.start_time|time_beautifier }} {{ ' - ' }}
             {{ i.end_time|time_beautifier }}</td>
           <td>{{ i.facility_description }}</td>
+          <td><a href="{% url 'addclass' subject i.catalog_number i.course_number%}">Add</a></td>
         </tr>
       {% endfor %}
       </tbody>
