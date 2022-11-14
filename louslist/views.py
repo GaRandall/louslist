@@ -173,7 +173,8 @@ def drop_class(request, dept, course_num, section):
     schedule = user.userSchedule.split()
     dropped = ""
     for c in schedule:
-        if c == dept + '_' + str(course_num) + '_' + str(section):
+        if c == dept.upper() + '_' + str(course_num) + '_' + str(section) or \
+                c == dept + '_' + str(course_num) + '_' + str(section):
             dropped = c
             break
     if dropped != "":
@@ -183,7 +184,9 @@ def drop_class(request, dept, course_num, section):
             new_schedule += " " + c
         user.userSchedule = new_schedule
         user.save()
+    print(user.userSchedule)
     return HttpResponseRedirect(reverse('viewschedule'))
+
 
 @login_required
 def view_schedule(request):
@@ -193,6 +196,7 @@ def view_schedule(request):
         userEmail=request.user.email,
     )
     schedule = user.userSchedule.split()
+    print(schedule)
     monday = []
     tuesday = []
     wednesday = []
@@ -274,13 +278,13 @@ def view_schedule(request):
         'saturday': saturday,
         'sunday': sunday
     }
-    print(monday)
-    print(tuesday)
-    print(wednesday)
-    print(thursday)
-    print(friday)
-    print(saturday)
-    print(sunday)
+    # print(monday)
+    # print(tuesday)
+    # print(wednesday)
+    # print(thursday)
+    # print(friday)
+    # print(saturday)
+    # print(sunday)
     return render(request, 'louslist/schedule.html', context)
 
 
