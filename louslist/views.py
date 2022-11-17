@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 import requests
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from .forms import NewReviewForm
-from .models import Dept, Subject, Review, UniqueUser
+from .models import Dept, Subject, Review, UniqueUser, Friend_Request
 from django.utils import timezone
 from django.urls import reverse
 from django.db.models import Q
@@ -341,3 +341,33 @@ def result(request):
     if tm_post:
         posts = posts.filter(Q(start_time__icontains=tm_post) or Q(end_time__icontains=tm_post))
     return render(request, 'louslist/result.html', {'posts': posts})
+
+def friendlist(request):
+    return render(request, 'louslist/friendlist.html')
+
+@login_required
+def add_friend(request, userName):
+    if request.method == "POST":
+        from_user = request.user
+        to_user = UniqueUser.objects.get(id=userName)
+        friend_request, created = Friend_Request.objects.get_or_create(
+            from_user=from_user, to_user=to_user
+        )
+        if created:
+            return HttpResponse('friend request sent')
+        else:
+            return HttpResponse('friend request already sent')
+    return render(request, 'louslist/friendlist.html')
+
+"""
+@login_required
+def accept_friend_request(request, requestID):
+    friend_request = Friend_Request.objects.get(id=requestID)
+    if friend_request.to_user == request.user:
+        friend_request.to_user.userFriends.add(friend_request.from_user)
+        friend_request.from_user.userFriends.add(friend_request.to_user)
+        friend_request.delete()
+        return HttpResponse('friend request accepted')
+    else:
+        return HttpResponse('friend request not accepted')
+"""

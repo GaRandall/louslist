@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load bootstrap5 %} {% bootstrap_css %}
+{% load stringfilters %}
+{# Load the tag library #}
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+{% load socialaccount %}
+<html>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'viewschedule' %}">Schedule</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Friends List</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'search' %}">Search!</a>
+            </li>
+        </ul>
+    </div>
+    <div class="mx-auto order-0">
+        <a class="navbar-brand mx-auto" href="">{{ user.username }}'s Friend List</a>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ms-auto">
+            {% if request.user.is_authenticated %}
+            <p class="text-light bg-dark">You are logged in as: {{ user.username }} &nbsp &nbsp</p>
+            <li class="nav-item">
+                <a class="nav-link" href="logout">Logout</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% provider_login_url 'google' %}">Login With Google</a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+
+<form method="post" id = "friendreq">
+{% csrf_token %}
+<input id="to_user" type="text" name="to_user" maxlength="100" required />
+<input type="submit" value="add as a friend" />
+</form>
