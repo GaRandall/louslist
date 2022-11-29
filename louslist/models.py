@@ -50,8 +50,14 @@ class UniqueUser(models.Model):
     userID = models.IntegerField(primary_key=True)
     userName = models.CharField(max_length=50)
     userEmail = models.CharField(max_length=50)
-    userFriends = models.CharField(max_length=500, default="")
+    userFriends = models.ManyToManyField("UniqueUser", blank = True)
     userSchedule = models.CharField(max_length=500, default="")
 
     def __str__(self):
         return self.userName
+
+class Friend_Request(models.Model):
+    from_user = models.ForeignKey(
+        UniqueUser, related_name='from_user', on_delete=models.CASCADE)
+    to_user = models.ForeignKey(
+        UniqueUser, related_name='to_user', on_delete=models.CASCADE)
