@@ -44,9 +44,15 @@
         </ul>
     </div>
 </nav>
-
-<form method="post" id = "friendreq">
-{% csrf_token %}
-<input id="to_user" type="text" name="to_user" maxlength="100" required />
-<input type="submit" value="add as a friend" />
-</form>
+<body>
+    <br>
+        <form class="form-inline col-5 offset-sm-1 " action="{% url 'friend_result' %}">
+            <label class="ml-5 mb-0 col-md-6" for="first_name">Friend name</label>
+            <input class="form-control  ml-sm-10 mb-2" type="search"   placeholder="search friend's email" aria-label="Search" name="search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+</body>
+{% for i in posts.userFriends.all %}
+    <a href="{% url 'schedules' i.userName %}">{{i.userName}}</a>
+{% endfor %}
+</html>

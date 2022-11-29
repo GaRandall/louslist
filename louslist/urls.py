@@ -1,8 +1,8 @@
-from django.urls import path, register_converter
-from . import views, converters
+from django.urls import path#, #register_converter
+from . import views#, converters
 from django.contrib.auth.views import LogoutView
 
-register_converter(converters.DepartmentConverter, 'dID')
+#register_converter(converters.DepartmentConverter, 'dID')
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -14,6 +14,9 @@ urlpatterns = [
     path('initialize', views.initialize, name='initialize'),
 
     path('friendlist', views.friendlist, name='friendlist'),
+    path('friend_result', views.friend_result, name='friend_result'),
+    path('<str:userName>/addfriend',views.addfriend,name='addfriend'),
+    path('<str:userName>/schedules',views.schedules,name='schedules'),
     #path('friendlist/<str:userName>/', views.add_friend, name='send friend request'),
     #path('friendlist/<int:requestID>/', views.accept_friend_request, name='accept friend request'),
 

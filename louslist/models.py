@@ -50,7 +50,7 @@ class UniqueUser(models.Model):
     userID = models.IntegerField(primary_key=True)
     userName = models.CharField(max_length=50)
     userEmail = models.CharField(max_length=50)
-    userFriends = models.ManyToManyField("self", blank = True)
+    userFriends = models.ManyToManyField("UniqueUser", blank = True)
     userSchedule = models.CharField(max_length=500, default="")
 
     def __str__(self):

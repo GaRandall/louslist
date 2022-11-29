@@ -343,7 +343,15 @@ def result(request):
     return render(request, 'louslist/result.html', {'posts': posts})
 
 def friendlist(request):
-    return render(request, 'louslist/friendlist.html')
+    user, created = UniqueUser.objects.get_or_create(
+        userID=request.user.id,
+        userName=request.user.username,
+        userEmail=request.user.email,
+    )
+    posts= UniqueUser.objects.all()
+    posts= posts.filter(Q(userName__iexact=user.userName))
+    posts= posts.first()
+    return render(request, 'louslist/friendlist.html',{'posts':posts})
 
 @login_required
 def add_friend(request, userName):
@@ -358,6 +366,121 @@ def add_friend(request, userName):
         else:
             return HttpResponse('friend request already sent')
     return render(request, 'louslist/friendlist.html')
+
+def friend_result(request):
+    search_post = request.GET.get('search')
+    posts = UniqueUser.objects.all()
+    if search_post:
+        posts = posts.filter(Q(userEmail__icontains=search_post))
+    return render(request, 'louslist/friend_result.html', {'posts': posts})
+
+
+def addfriend(request, userName):
+    user, created = UniqueUser.objects.get_or_create(
+        userID=request.user.id,
+        userName=request.user.username,
+        userEmail=request.user.email,
+    )
+    user.userFriends.add(UniqueUser.objects.get(userName=userName))
+    user.save()
+    return HttpResponseRedirect(reverse('friendlist'))
+
+def schedules(request,userName):
+    user=UniqueUser.objects.get(userName=userName)
+    schedule = user.userSchedule.split()
+    print(schedule)
+    monday = []
+    tuesday = []
+    wednesday = []
+    thursday = []
+    friday = []
+    saturday = []
+    sunday = []
+    for c in schedule:
+        dept = ""
+        course_num = ""
+        section = ""
+        count_spaces = 0
+        for letter in c:
+            if letter == '_':
+                count_spaces += 1
+            else:
+                if count_spaces == 0:
+                    dept += letter
+                elif count_spaces == 1:
+                    course_num += letter
+                elif count_spaces == 2:
+                    section += letter
+        dept_json = requests.get('http://luthers-list.herokuapp.com/api/dept/' + dept.upper() + '/?format=json').json()
+        meeting_days = ""
+        meeting_start = ""
+        meeting_end = ""
+        course_description = ""
+        location = ""
+        course_id = ""
+        subject = ""
+        catalog_number = ""
+        for cl in dept_json:
+            if str(cl['course_number']) == section:
+                subject = cl['subject']
+                catalog_number = cl['catalog_number']
+                course_id = cl['subject'] + cl['catalog_number']
+                meeting_days = cl['meetings'][0]['days']
+                meeting_start = cl['meetings'][0]['start_time']
+                meeting_end = cl['meetings'][0]['end_time']
+                course_description = cl['description']
+                location = cl['meetings'][0]['facility_description']
+        attributes = {
+            'course_id': course_id,
+            'course_description': course_description,
+            'meeting_start': meeting_start,
+            'meeting_end': meeting_end,
+            'location': location,
+            'subject': subject.lower(),
+            'catalog_number': catalog_number,
+            'section': section,
+        }
+        if "Mo" in meeting_days:
+            monday.append(attributes)
+        if "Tu" in meeting_days:
+            tuesday.append(attributes)
+        if "We" in meeting_days:
+            wednesday.append(attributes)
+        if "Th" in meeting_days:
+            thursday.append(attributes)
+        if "Fr" in meeting_days:
+            friday.append(attributes)
+        if "Sa" in meeting_days:
+            saturday.append(attributes)
+        if "Su" in meeting_days:
+            sunday.append(attributes)
+    monday.sort(key=_sort_times_)
+    tuesday.sort(key=_sort_times_)
+    wednesday.sort(key=_sort_times_)
+    thursday.sort(key=_sort_times_)
+    friday.sort(key=_sort_times_)
+    saturday.sort(key=_sort_times_)
+    sunday.sort(key=_sort_times_)
+    context = {
+        'name': user.userName,
+        'monday': monday,
+        'tuesday': tuesday,
+        'wednesday': wednesday,
+        'thursday': thursday,
+        'friday': friday,
+        'saturday': saturday,
+        'sunday': sunday
+    }
+    # print(monday)
+    # print(tuesday)
+    # print(wednesday)
+    # print(thursday)
+    # print(friday)
+    # print(saturday)
+    # print(sunday)
+    return render(request, 'louslist/schedules.html', context)
+
+
 
 """
 @login_required
