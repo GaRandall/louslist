@@ -3,10 +3,6 @@ from django.contrib.auth.models import AbstractUser
 from django.conf import settings
 
 
-# class User(AbstractUser):
-#    courses=
-
-
 class Dept(models.Model):
     subject = models.CharField(max_length=200, primary_key=True, db_column='subject_id')
     js = models.JSONField(default=dict)
@@ -50,11 +46,12 @@ class UniqueUser(models.Model):
     userID = models.IntegerField(primary_key=True)
     userName = models.CharField(max_length=50)
     userEmail = models.CharField(max_length=50)
-    userFriends = models.ManyToManyField("UniqueUser", blank = True)
+    userFriends = models.ManyToManyField("UniqueUser", blank=True)
     userSchedule = models.CharField(max_length=500, default="")
 
     def __str__(self):
         return self.userName
+
 
 class Friend_Request(models.Model):
     from_user = models.ForeignKey(
