@@ -27,7 +27,11 @@
         </ul>
     </div>
     <div class="mx-auto order-0">
-        <a class="navbar-brand mx-auto" href="">{{ user.username }}'s Friend List</a>
+        {% if request.user.is_authenticated %}
+            <a class="navbar-brand mx-auto" href="">{{ user.username }}'s Friend List</a>
+        {% else %}
+            <a class="navbar-brand mx-auto" href="">Friend List</a>
+        {% endif %}
     </div>
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
         <ul class="navbar-nav ms-auto">
@@ -46,13 +50,18 @@
 </nav>
 <body>
     <br>
+    {% if request.user.is_authenticated %}
         <form class="form-inline col-5 offset-sm-1 " action="{% url 'friend_result' %}">
             <label class="ml-5 mb-0 col-md-6" for="first_name">Friend name</label>
             <input class="form-control  ml-sm-10 mb-2" type="search"   placeholder="search friend's email" aria-label="Search" name="search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
+    {% endif %}
 </body>
-{% for i in posts.userFriends.all %}
-    <a href="{% url 'schedules' i.userName %}">{{i.userName}}</a>
-{% endfor %}
+{% if request.user.is_authenticated %}
+    {% for i in posts.userFriends.all %}
+        <a href="{% url 'schedules' i.userName %}">{{i.userName}}</a>
+    {% endfor %}
+{% endif %}
 </html>
+

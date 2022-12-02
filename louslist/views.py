@@ -342,30 +342,20 @@ def result(request):
         posts = posts.filter(Q(start_time__icontains=tm_post) or Q(end_time__icontains=tm_post))
     return render(request, 'louslist/result.html', {'posts': posts})
 
-def friendlist(request):
-    user, created = UniqueUser.objects.get_or_create(
-        userID=request.user.id,
-        userName=request.user.username,
-        userEmail=request.user.email,
-    )
-    posts= UniqueUser.objects.all()
-    posts= posts.filter(Q(userName__iexact=user.userName))
-    posts= posts.first()
-    return render(request, 'louslist/friendlist.html',{'posts':posts})
-
 @login_required
-def add_friend(request, userName):
-    if request.method == "POST":
-        from_user = request.user
-        to_user = UniqueUser.objects.get(id=userName)
-        friend_request, created = Friend_Request.objects.get_or_create(
-            from_user=from_user, to_user=to_user
+def friendlist(request):
+    if(request.user.is_authenticated):
+        user, created = UniqueUser.objects.get_or_create(
+            userID=request.user.id,
+            userName=request.user.username,
+            userEmail=request.user.email,
         )
-        if created:
-            return HttpResponse('friend request sent')
-        else:
-            return HttpResponse('friend request already sent')
-    return render(request, 'louslist/friendlist.html')
+        posts= UniqueUser.objects.all()
+        posts= posts.filter(Q(userName__iexact=user.userName))
+        posts= posts.first()
+    else:
+        posts=""
+    return render(request, 'louslist/friendlist.html',{'posts':posts})
 
 def friend_result(request):
     search_post = request.GET.get('search')
