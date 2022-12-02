@@ -173,3 +173,7 @@ try:
         django_heroku.settings(locals())
 except ImportError:
     found = False
+
+# Security settings
+SECURE_SSL_REDIRECT = True
+SECURE_HSTS_PRELOAD = True
