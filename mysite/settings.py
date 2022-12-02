@@ -175,5 +175,4 @@ except ImportError:
     found = False
 
 # Security Measures
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARD_PROTO', 'https')
 SECURE_SSL_REDIRECT = True
