@@ -73,8 +73,8 @@ def departments(request, dept):
         'data': data,
         'subject': dept
     }
-    return render(request, 'louslist/subject.html', context)
 
+    return render(request, 'louslist/subject.html', context)
 
 def course(request, dept, course_num):
     review_total = 0

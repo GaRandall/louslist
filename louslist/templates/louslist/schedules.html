@@ -55,7 +55,6 @@
             <th scope="col">Starts</th>
             <th scope="col">Ends</th>
             <th scope="col">Location</th>
-            <th scope="col">Drop?</th>
         </tr>
         </thead>
         {% for c in monday %}
@@ -65,7 +64,6 @@
             <td>{{ c.meeting_start|time_beautifier }}</td>
             <td>{{ c.meeting_end|time_beautifier }}</td>
             <td>{{ c.location }}</td>
-            <td><a href="{% url 'dropclass' c.subject c.catalog_number c.section %}">Drop</a> </td>
         </tr>
         {% endfor %}
     </table>
@@ -80,7 +78,6 @@
             <th scope="col">Starts</th>
             <th scope="col">Ends</th>
             <th scope="col">Location</th>
-            <th scope="col">Drop?</th>
         </tr>
         </thead>
         {% for c in tuesday %}
@@ -90,7 +87,6 @@
             <td>{{ c.meeting_start|time_beautifier }}</td>
             <td>{{ c.meeting_end|time_beautifier }}</td>
             <td>{{ c.location }}</td>
-            <td><a href="{% url 'dropclass' c.subject c.catalog_number c.section %}">Drop</a> </td>
         </tr>
         {% endfor %}
     </table>
@@ -105,7 +101,6 @@
             <th scope="col">Starts</th>
             <th scope="col">Ends</th>
             <th scope="col">Location</th>
-            <th scope="col">Drop?</th>
         </tr>
         </thead>
         {% for c in wednesday %}
@@ -115,7 +110,6 @@
             <td>{{ c.meeting_start|time_beautifier }}</td>
             <td>{{ c.meeting_end|time_beautifier }}</td>
             <td>{{ c.location }}</td>
-            <td><a href="{% url 'dropclass' c.subject c.catalog_number c.section %}">Drop</a> </td>
         </tr>
         {% endfor %}
     </table>
@@ -130,7 +124,6 @@
             <th scope="col">Starts</th>
             <th scope="col">Ends</th>
             <th scope="col">Location</th>
-            <th scope="col">Drop?</th>
         </tr>
         </thead>
         {% for c in thursday %}
@@ -140,7 +133,6 @@
             <td>{{ c.meeting_start|time_beautifier }}</td>
             <td>{{ c.meeting_end|time_beautifier }}</td>
             <td>{{ c.location }}</td>
-            <td><a href="{% url 'dropclass' c.subject c.catalog_number c.section %}">Drop</a> </td>
         </tr>
         {% endfor %}
     </table>
@@ -155,7 +147,6 @@
             <th scope="col">Starts</th>
             <th scope="col">Ends</th>
             <th scope="col">Location</th>
-            <th scope="col">Drop?</th>
         </tr>
         </thead>
         {% for c in friday %}
@@ -165,7 +156,6 @@
             <td>{{ c.meeting_start|time_beautifier }}</td>
             <td>{{ c.meeting_end|time_beautifier }}</td>
             <td>{{ c.location }}</td>
-            <td><a href="{% url 'dropclass' c.subject c.catalog_number c.section %}">Drop</a> </td>
         </tr>
         {% endfor %}
     </table>
@@ -180,7 +170,6 @@
             <th scope="col">Starts</th>
             <th scope="col">Ends</th>
             <th scope="col">Location</th>
-            <th scope="col">Drop?</th>
         </tr>
         </thead>
         {% for c in saturday %}
@@ -190,7 +179,6 @@
             <td>{{ c.meeting_start|time_beautifier }}</td>
             <td>{{ c.meeting_end|time_beautifier }}</td>
             <td>{{ c.location }}</td>
-            <td><a href="{% url 'dropclass' c.subject c.catalog_number c.section %}">Drop</a> </td>
         </tr>
         {% endfor %}
     </table>
@@ -205,7 +193,6 @@
             <th scope="col">Starts</th>
             <th scope="col">Ends</th>
             <th scope="col">Location</th>
-            <th scope="col">Drop?</th>
         </tr>
         </thead>
         {% for c in sunday %}
@@ -215,10 +202,12 @@
             <td>{{ c.meeting_start|time_beautifier }}</td>
             <td>{{ c.meeting_end|time_beautifier }}</td>
             <td>{{ c.location }}</td>
-            <td><a href="{% url 'dropclass' c.subject.lower c.catalog_number c.section %}">Drop</a> </td>
         </tr>
         {% endfor %}
     </table>
     {% endif %}
     </body>
+    <div class="d-flex justify-content-center">
+        <a class="btn btn-primary" href="{% url 'friendlist' %}" role="button">Go Back</a>
+        </div>
 </html>

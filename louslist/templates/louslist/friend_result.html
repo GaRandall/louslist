@@ -49,10 +49,36 @@
     </div>
   </nav>
   <body>
-        {% for i in posts%}
-            <h1>{{i.userName}}</h1>
-            <a href="{% url 'addfriend' i.userName %}">Add to friendlist?</a>
-        {% endfor %}
+
+  {% if posts %}
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+          <th scope="col">User</th>
+          <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+    {% load stringfilters %}
+    {% for i in posts%}
+      <tr>
+        <th scope="row">{{ i.userName }}</th>
+        <td><a href="{% url 'addfriend' i.userName %}">Add to friendlist?</a></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+    {% else %}
+    <div class="text-center">
+        <b style="font-size: 30px">No user found with the entered email address</b>
+    </div>
+    {% endif %}
   </body>
+
+  <div class="fixed-bottom d-flex justify-content-center">
+    <a class="btn btn-primary" href="{% url 'friendlist' %}" role="button">Go Back</a>
+    </div>
+
 </html>
 
