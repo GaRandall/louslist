@@ -76,6 +76,7 @@ def departments(request, dept):
 
     return render(request, 'louslist/subject.html', context)
 
+
 def course(request, dept, course_num):
     review_total = 0
     difficulty_total = 0
@@ -342,20 +343,22 @@ def result(request):
         posts = posts.filter(Q(start_time__icontains=tm_post) or Q(end_time__icontains=tm_post))
     return render(request, 'louslist/result.html', {'posts': posts})
 
+
 @login_required
 def friendlist(request):
-    if(request.user.is_authenticated):
+    if (request.user.is_authenticated):
         user, created = UniqueUser.objects.get_or_create(
             userID=request.user.id,
             userName=request.user.username,
             userEmail=request.user.email,
         )
-        posts= UniqueUser.objects.all()
-        posts= posts.filter(Q(userName__iexact=user.userName))
-        posts= posts.first()
+        posts = UniqueUser.objects.all()
+        posts = posts.filter(Q(userName__iexact=user.userName))
+        posts = posts.first()
     else:
-        posts=""
-    return render(request, 'louslist/friendlist.html',{'posts':posts})
+        posts = ""
+    return render(request, 'louslist/friendlist.html', {'posts': posts})
+
 
 def friend_result(request):
     search_post = request.GET.get('search')
@@ -375,8 +378,18 @@ def addfriend(request, userName):
     user.save()
     return HttpResponseRedirect(reverse('friendlist'))
 
-def schedules(request,userName):
-    user=UniqueUser.objects.get(userName=userName)
+def removefriend(request, userName):
+    user, created = UniqueUser.objects.get_or_create(
+        userID=request.user.id,
+        userName=request.user.username,
+        userEmail=request.user.email,
+    )
+    user.userFriends.remove(UniqueUser.objects.get(userName=userName))
+    user.save()
+    return HttpResponseRedirect(reverse('friendlist'))
+
+def schedules(request, userName):
+    user = UniqueUser.objects.get(userName=userName)
     schedule = user.userSchedule.split()
     print(schedule)
     monday = []
@@ -469,7 +482,6 @@ def schedules(request,userName):
     # print(saturday)
     # print(sunday)
     return render(request, 'louslist/schedules.html', context)
-
 
 
 """

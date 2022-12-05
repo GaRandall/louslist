@@ -58,7 +58,7 @@
                 <h1 class="mt-4" style="text-transform: uppercase">{{ dept }}{{ course_num }}</h1>
                 <!-- Author -->
                 <h4>Avg review score: {{ review_avg }} ({{ review_count }} review(s))</h4>
-                <h4> Avg difficulty score: {{ difficulty_avg }}</h4>
+                <h4>Avg difficulty score: {{ difficulty_avg }}</h4>
                 <div class="rating-star">
                     {% load filter_int %}
                     {% if review_avg|to_int > 0 %}
