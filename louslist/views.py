@@ -207,6 +207,9 @@ def view_schedule(request):
     #     userEmail=request.user.email,
     # )
     schedule = request.user.uniqueuser.userSchedule.split()
+    if(request.user.uniqueuser.userSchedule==''):
+        messages.add_message(request, messages.ERROR, "You don't have anything in Schedule. Please enroll in class first!") 
+        return HttpResponseRedirect(reverse('home'))
     print(schedule)
     monday = []
     tuesday = []
