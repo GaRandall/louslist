@@ -85,15 +85,9 @@
           <td>{{ i.start_time|time_beautifier }} {{ ' - ' }}
             {{ i.end_time|time_beautifier }}</td>
           <td>{{ i.facility_description }}</td>
-          <td><a href="{% url 'addclass' i.subject i.catalog_number i.course_number%}" onclick="successfullyAdded()">Add</a></td>
+          <td><a href="{% url 'addclass' i.subject i.catalog_number i.course_number%}">Add</a></td>
         </tr>
       {% endfor %}
-
-      <script>
-        function successfullyAdded(){
-          alert("Course has been succesfully added to your schedule!")
-        }
-      </script>
 
       </tbody>
     </table>

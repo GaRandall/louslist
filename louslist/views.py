@@ -167,15 +167,48 @@ def create(request):
             messages.add_message(request, messages.SUCCESS, "You're Successfully logged in as: "+a.first().userName)
             return render(request, 'louslist/index.html', {'posts':posts})
 
-
+def getTime(value):
+    if value == "":
+        return 0
+    if value =='-':
+        return 0
+    v = value
+    hour_string = ""
+    minute_string = ""
+    dot_count = 0
+    for c in value:
+        if c == '.':
+            dot_count += 1
+            if dot_count == 2:
+                break
+        else:
+            if dot_count == 0:
+                hour_string += c
+            if dot_count == 1:
+                minute_string += c
+    hour = int(hour_string)
+    return hour+ (int(minute_string)/60)
 
 def add_class(request, dept, course_num, section):
     schedule = request.user.uniqueuser.userSchedule.split()
     for c in schedule:
         if c == dept + '_' + str(course_num) + '_' + str(section):
+            messages.add_message(request, messages.ERROR, "You can't add the same class") 
+            return HttpResponseRedirect(reverse('depts', args=[dept]))
+        temp=c[c.find('_')+1:]
+        temp=temp[temp.find('_')+1:]
+        a=Subject.objects.filter(Q(course_number__icontains=temp)).first()
+        b=Subject.objects.filter(Q(course_number__icontains=section)).first()
+        a_start=getTime(a.start_time)
+        a_end=getTime(a.start_time)
+        b_start=getTime(b.start_time)
+        b_end=getTime(b.end_time)
+        if ( (b_start>=a_start and b_start<=a_end) or (b_end>=a_start and b_end<=a_end) ):
+            messages.add_message(request, messages.ERROR, "The class that you have selected have time conflictions with your enrolled classes!") 
             return HttpResponseRedirect(reverse('depts', args=[dept]))
     request.user.uniqueuser.userSchedule += ' ' + dept + '_' + str(course_num) + '_' + str(section)
     request.user.uniqueuser.save()
+    messages.add_message(request, messages.SUCCESS, "You have succesfully added a class!") 
     return HttpResponseRedirect(reverse('depts', args=[dept.lower()]))
 
 
@@ -209,7 +242,6 @@ def view_schedule(request):
     schedule = request.user.uniqueuser.userSchedule.split()
     if(request.user.uniqueuser.userSchedule==''):
         messages.add_message(request, messages.ERROR, "You don't have anything in Schedule. Please enroll in class first!") 
-        return HttpResponseRedirect(reverse('home'))
     print(schedule)
     monday = []
     tuesday = []
@@ -326,6 +358,8 @@ def _sort_times_(course_dict):
     if minute_string == "":
         minute_string = "59"
     return int(hour_string) * 60 + int(minute_string)
+
+
 
 
 def searchbar(request):
