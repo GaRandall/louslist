@@ -9,6 +9,7 @@ from django.db.models import Q
 import json
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 # Create your views here.
@@ -163,6 +164,7 @@ def create(request):
         if(a.first().lastName==''):
             return render(request, 'louslist/create.html', {'posts':posts})
         else:
+            messages.add_message(request, messages.SUCCESS, "You're Successfully logged in as: "+a.first().userName)
             return render(request, 'louslist/index.html', {'posts':posts})
 
 
@@ -485,6 +487,7 @@ def finished(request):
         request.user.uniqueuser.Major=major_post
         request.user.uniqueuser.Year=year_post
         request.user.uniqueuser.save()
+        messages.add_message(request, messages.SUCCESS, "You're Successfully logged in as: "+name_post)
         return HttpResponseRedirect(reverse('home'))
 
 """
