@@ -53,12 +53,6 @@
             </ul>
         </div>
     </nav>
-    {% if not monday and not tuesday and not wednesday and not thursday and not friday %}
-    <h1 style="text-align: center;">Nothing is added your schedule! </h1>
-    {%endif%}
-    {% if monday or tuesday or wednesday or thursday or friday %}
-    <h1 style="text-align: center;">Your Schedule</h1>
-    {%endif%}
     <body>
     {% if monday %}
     <h4>Monday</h4>
@@ -80,7 +74,7 @@
             <td>{{ c.meeting_start|time_beautifier }}</td>
             <td>{{ c.meeting_end|time_beautifier }}</td>
             <td>{{ c.location }}</td>
-            <td><a href="{% url 'dropclass' c.subject c.catalog_number c.section %}"onclick="return confirm('Are you sure you want to drop this class from your schedule?')">Drop</a> </td>
+            <td><a href="{% url 'dropclass' c.subject c.catalog_number c.section %}">Drop</a> </td>
         </tr>
         {% endfor %}
     </table>
@@ -105,7 +99,7 @@
             <td>{{ c.meeting_start|time_beautifier }}</td>
             <td>{{ c.meeting_end|time_beautifier }}</td>
             <td>{{ c.location }}</td>
-            <td><a href="{% url 'dropclass' c.subject c.catalog_number c.section %}"onclick="return confirm('Are you sure you want to drop this class from your schedule?')">Drop</a> </td>
+            <td><a href="{% url 'dropclass' c.subject c.catalog_number c.section %}">Drop</a> </td>
         </tr>
         {% endfor %}
     </table>
@@ -130,7 +124,7 @@
             <td>{{ c.meeting_start|time_beautifier }}</td>
             <td>{{ c.meeting_end|time_beautifier }}</td>
             <td>{{ c.location }}</td>
-            <td><a href="{% url 'dropclass' c.subject c.catalog_number c.section %}" onclick="return confirm('Are you sure you want to drop this class from your schedule?')">Drop</a> </td>
+            <td><a href="{% url 'dropclass' c.subject c.catalog_number c.section %}">Drop</a> </td>
         </tr>
         {% endfor %}
     </table>
@@ -155,7 +149,7 @@
             <td>{{ c.meeting_start|time_beautifier }}</td>
             <td>{{ c.meeting_end|time_beautifier }}</td>
             <td>{{ c.location }}</td>
-            <td><a href="{% url 'dropclass' c.subject c.catalog_number c.section %}" onclick="return confirm('Are you sure you want to drop this class from your schedule?')">Drop</a> </td>
+            <td><a href="{% url 'dropclass' c.subject c.catalog_number c.section %}">Drop</a> </td>
         </tr>
         {% endfor %}
     </table>
@@ -180,7 +174,8 @@
             <td>{{ c.meeting_start|time_beautifier }}</td>
             <td>{{ c.meeting_end|time_beautifier }}</td>
             <td>{{ c.location }}</td>
-            <td><a href="{% url 'dropclass' c.subject c.catalog_number c.section %}" onclick="return confirm('Are you sure you want to drop this class from your schedule?')">Drop</a></td>
+            <td><a href="{% url 'dropclass' c.subject c.catalog_number c.section %}">Drop</a> </td>
+        </tr>
         {% endfor %}
     </table>
     {% endif %}
@@ -204,7 +199,7 @@
             <td>{{ c.meeting_start|time_beautifier }}</td>
             <td>{{ c.meeting_end|time_beautifier }}</td>
             <td>{{ c.location }}</td>
-            <td><a href="{% url 'dropclass' c.subject c.catalog_number c.section %}"onclick="return confirm('Are you sure you want to drop this class from your schedule?')">Drop</a> </td>
+            <td><a href="{% url 'dropclass' c.subject c.catalog_number c.section %}">Drop</a> </td>
         </tr>
         {% endfor %}
     </table>
@@ -229,7 +224,7 @@
             <td>{{ c.meeting_start|time_beautifier }}</td>
             <td>{{ c.meeting_end|time_beautifier }}</td>
             <td>{{ c.location }}</td>
-            <td><a href="{% url 'dropclass' c.subject.lower c.catalog_number c.section %}"onclick="return confirm('Are you sure you want to drop this class from your schedule?')">Drop</a> </td>
+            <td><a href="{% url 'dropclass' c.subject.lower c.catalog_number c.section %}">Drop</a> </td>
         </tr>
         {% endfor %}
     </table>

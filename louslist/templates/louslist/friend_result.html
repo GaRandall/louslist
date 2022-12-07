@@ -59,20 +59,19 @@
   <body>
 
   {% if posts %}
-  <h1 style="text-align: center;"> Search Result</h1>
-  <table class="table table-bordered table-striped" style="width:50%; margin: auto;">
+  <table class="table table-bordered table-striped">
     <thead>
       <tr>
-          <th scope="col" style="width: 50%">Friend's Username </th>
-          <th scope="col">Add User to Your Friends List?</th>
+          <th scope="col">User</th>
+          <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
     {% load stringfilters %}
     {% for i in posts%}
       <tr>
-        <th scope="row" style="width: 50%">{{ i.userName }}</th>
-        <td><a href="{% url 'addfriend' i.userName %}">Add</a></td>
+        <th scope="row">{{ i.userName }}</th>
+        <td><a href="{% url 'addfriend' i.userName %}">Add to friendlist?</a></td>
       </tr>
     {% endfor %}
     </tbody>
