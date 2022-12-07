@@ -160,7 +160,10 @@ def create(request):
         return render(request, 'louslist/create.html', {'posts':posts})
     else:
         posts=True
-        return render(request, 'louslist/index.html', {'posts':posts})
+        if(a.first().lastName==''):
+            return render(request, 'louslist/create.html', {'posts':posts})
+        else:
+            return render(request, 'louslist/index.html', {'posts':posts})
 
 
 
