@@ -218,6 +218,7 @@ def view_schedule(request):
     friday = []
     saturday = []
     sunday = []
+    notime=[]
     for c in schedule:
         dept = ""
         course_num = ""
@@ -262,6 +263,8 @@ def view_schedule(request):
             'catalog_number': catalog_number,
             'section': section,
         }
+        if "-" in meeting_days:
+            notime.append(attributes)
         if "Mo" in meeting_days:
             monday.append(attributes)
         if "Tu" in meeting_days:
@@ -290,7 +293,8 @@ def view_schedule(request):
         'thursday': thursday,
         'friday': friday,
         'saturday': saturday,
-        'sunday': sunday
+        'sunday': sunday,
+        'notime': notime
     }
     # print(monday)
     # print(tuesday)
@@ -394,6 +398,7 @@ def schedules(request,userName):
     friday = []
     saturday = []
     sunday = []
+    notime=[] 
     for c in schedule:
         dept = ""
         course_num = ""
@@ -438,6 +443,8 @@ def schedules(request,userName):
             'catalog_number': catalog_number,
             'section': section,
         }
+        if "-" in meeting_days:
+            notime.append(attributes)
         if "Mo" in meeting_days:
             monday.append(attributes)
         if "Tu" in meeting_days:
@@ -467,7 +474,8 @@ def schedules(request,userName):
         'thursday': thursday,
         'friday': friday,
         'saturday': saturday,
-        'sunday': sunday
+        'sunday': sunday,
+        'notime': notime
     }
     # print(monday)
     # print(tuesday)

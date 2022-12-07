@@ -54,6 +54,30 @@
         </div>
     </nav>
     <body>
+    {% if notime %}
+        <h4>Time TBA</h4>
+        <table class="table table-striped table-light">
+            <thead>
+            <tr>
+                <th scope="col">Course Number</th>
+                <th scope="col">Course Title</th>
+                <th scope="col">Starts</th>
+                <th scope="col">Ends</th>
+                <th scope="col">Location</th>
+            </tr>
+            </thead>
+            {% for c in notime %}
+            <tr>
+                <th scope="row">{{ c.course_id }}</th>
+                <td>{{ c.course_description }}</td>
+                <td>{{ c.meeting_start|time_beautifier }}</td>
+                <td>{{ c.meeting_end|time_beautifier }}</td>
+                <td>{{ c.location }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+    
     {% if monday %}
     <h4>Monday</h4>
     <table class="table table-striped table-light">
