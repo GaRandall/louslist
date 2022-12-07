@@ -53,13 +53,12 @@
     </div>
 </nav>
 <body>
-<h1 style="text-align: center;">Your Friends List</h1>
     <br>
     {% if request.user.is_authenticated %}
     <div class="d-flex justify-content-center">
         <form class="form-inline col-5 offset-sm-1 " action="{% url 'friend_result' %}">
             <div class="d-flex justify-content-center"></div>
-            <input class="form-control  ml-sm-10 mb-2" type="search"   placeholder="Search for a Friend's Email (Leave blank to see all users)" aria-label="Search" name="search">
+            <input class="form-control  ml-sm-10 mb-2" type="search"   placeholder="search friend's email (Leave blank to see all users)" aria-label="Search" name="search">
         </div>
             <div class="text-center">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -68,28 +67,26 @@
     </div>
     {% endif %}
 </body>
+
 {% if request.user.is_authenticated %}
-    <table class="table table-bordered table-striped" style="width:50%; margin: auto;">>
+    <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th scope="col" class="text-center">Click a Friend's Username to See Their Schedule</th>
-                <th scope="col" class="text-center">Remove Friend from Friend List</th>
+                <th scope="col" class="text-center">click name to see schedule</th>
             </tr>
         </thead>
     <tbody>
     {% load stringfilters %}
     {% for i in posts.userFriends.all %}
         <tr>
-            <td scope="row"><a href="{% url 'schedules' i.userName %}">{{i.userName}}</a></td>
-            <td scope="row"><a href="{% url 'removefriend' i.userName %}">Remove Friend</a></td>
+            <td class="text-center"><a href="{% url 'schedules' i.userName %}">{{i.userName}}</a></td>
         </tr>
     {% endfor %}
     </tbody>
 </table>
 {% else %}
-	&nbsp;
     <div class="text-center">
-        <h2>You Have Not Added Any Friends</h2>
+        <b style="font-size: 30px">You Currently Have No Friends</b>
     </div>
 {% endif %}
 </html>

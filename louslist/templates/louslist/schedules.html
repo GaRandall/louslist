@@ -54,12 +54,6 @@
         </div>
     </nav>
     <body>
-    {% if not monday and not tuesday and not wednesday and not thursday and not friday %}
-    <h1 style="text-align: center;">Nothing is added to {{name}}'s schedule! </h1>
-    {%endif%}
-    {% if monday or tuesday or wednesday or thursday or friday %}
-    <h1 style="text-align: center;">{{name}}'s Schedule</h1>
-    {%endif%}
     {% if monday %}
     <h4>Monday</h4>
     <table class="table table-striped table-light">
