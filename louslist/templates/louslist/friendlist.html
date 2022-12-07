@@ -51,9 +51,34 @@
         </ul>
     </div>
 </nav>
+<label class="ml-10 mb-0 col-md-6" style="font-size:35px;">Your Profile</label>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th scope="col" class="text-center">UserName</th>
+            <th scope="col" class="text-center">Last Name</th>
+            <th scope="col" class="text-center">First Name</th>
+            <th scope="col" class="text-center">Major</th>
+            <th scope="col" class="text-center">Class Year</th>
+            <th scope="col" class="text-center">Email</th>
+
+        </tr>
+    </thead>
+<tbody>
+{% load stringfilters %}
+    <tr>
+        <td class="text-center">{{request.user.uniqueuser.userName}}</td>
+        <td class="text-center">{{request.user.uniqueuser.lastName}}</td>
+        <td class="text-center">{{request.user.uniqueuser.firstName}}</td>
+        <td class="text-center">{{request.user.uniqueuser.Major}}</td>
+        <td class="text-center">{{request.user.uniqueuser.Year}}</td>
+        <td class="text-center">{{request.user.uniqueuser.userEmail}}</td>
+    </tr>
+</tbody>
+</table>
 <body>
     {% if request.user.uniqueuser.is_authenticate %}
-    <label class="ml-10 mb-0 col-md-6" style="font-size:30px;">Search Your Friends!</label>
+    <label class="ml-10 mb-0 col-md-6" style="font-size:35px;">Search Your Friends!</label>
     <form class="form-inline col-6 offset-sm-3 " action="{% url 'friend_result' %}">
         <div class="input-group">
             <input class="form-control  ml-sm-10 mb-2" type="search"   placeholder="search friend's email" aria-label="Search" name="search">
@@ -65,7 +90,7 @@
 </body>
 <br>
 {% if request.user.uniqueuser.is_authenticate %}
-<label class="ml-10 mb-0 col-md-6" style="font-size:30px;">Friends List</label>
+<label class="ml-10 mb-0 col-md-6" style="font-size:35px;">Friends List</label>
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
