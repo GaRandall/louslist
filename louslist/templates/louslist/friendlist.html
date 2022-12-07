@@ -101,6 +101,7 @@
                 <th scope="col" class="text-center">Class Year</th>
                 <th scope="col" class="text-center">Email</th>
                 <th scope="col" class="text-center"></th>
+                <th scope="col" class="text-center"></th>
             </tr>
         </thead>
     <tbody>
@@ -114,6 +115,7 @@
             <td class="text-center">{{i.Year}}</td>
             <td class="text-center">{{i.userEmail}}</td>
             <td class="text-center"><a href="{% url 'schedules' i.userName %}">View Schedule</a></td>
+            <td class="text-center"><a href="{% url 'removefriend' i.userName %}">Remove Friend?</a></td>
         </tr>
     {% endfor %}
     </tbody>

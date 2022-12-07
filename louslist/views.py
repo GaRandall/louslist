@@ -378,6 +378,11 @@ def addfriend(request, userName):
     request.user.uniqueuser.save()
     return HttpResponseRedirect(reverse('friendlist'))
 
+def removefriend(request, userName):
+    request.user.uniqueuser.userFriends.remove(UniqueUser.objects.get(userName=userName))
+    request.user.uniqueuser.save()
+    return HttpResponseRedirect(reverse('friendlist'))
+
 def schedules(request,userName):
     user=UniqueUser.objects.get(userName=userName)
     schedule = user.userSchedule.split()
