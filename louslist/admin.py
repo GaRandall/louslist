@@ -19,7 +19,7 @@ class ReviewAdmin(admin.ModelAdmin):
 
 
 class UniqueUserAdmin(admin.ModelAdmin):
-    fields = ['userID', 'userName', 'userEmail', 'userFriends', 'userSchedule']
+    fields = ['user','userID','userName', 'userEmail', 'userFriends', 'userSchedule','is_authenticate','lastName','firstName','Major','Year']
 
 
 admin.site.register(Dept, DeptAdmin)

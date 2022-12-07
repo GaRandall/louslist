@@ -11,7 +11,9 @@ urlpatterns = [
     path('result', views.result, name='result'),
     path('logout', LogoutView.as_view()),
     path('schedule', views.view_schedule, name='viewschedule'),
+    path('create',views.create,name='create'),
     path('initialize', views.initialize, name='initialize'),
+    path('finished',views.finished,name='finished'),
 
     path('friendlist', views.friendlist, name='friendlist'),
     path('friend_result', views.friend_result, name='friend_result'),

@@ -145,32 +145,37 @@ def review_detail(request, dept, course_num, review_id):
 
 
 def add_user(request):
-    obj, created = UniqueUser.objects.get_or_create(
-        userID=request.user.id,
-        userName=request.user.username,
-        userEmail=request.user.email,
-    )
-    return HttpResponseRedirect(reverse('home'))
+    return HttpResponseRedirect(reverse('create'))
+
+def create(request):
+    a=UniqueUser.objects.filter(Q(userID__icontains=request.user.id))
+    if not a:
+        user, created = UniqueUser.objects.get_or_create(
+            user=request.user,
+            userName=request.user.username,
+            userID=request.user.id,
+            userEmail=request.user.email,
+        )
+        posts=True
+        return render(request, 'louslist/create.html', {'posts':posts})
+    else:
+        posts=True
+        return render(request, 'louslist/index.html', {'posts':posts})
+
 
 
 def add_class(request, dept, course_num, section):
-    user, created = UniqueUser.objects.get_or_create(
-        userID=request.user.id,
-        userName=request.user.username,
-        userEmail=request.user.email,
-    )
-    schedule = user.userSchedule.split()
+    schedule = request.user.uniqueuser.userSchedule.split()
     for c in schedule:
         if c == dept + '_' + str(course_num) + '_' + str(section):
             return HttpResponseRedirect(reverse('depts', args=[dept]))
-    user.userSchedule += ' ' + dept + '_' + str(course_num) + '_' + str(section)
-    user.save()
+    request.user.uniqueuser.userSchedule += ' ' + dept + '_' + str(course_num) + '_' + str(section)
+    request.user.uniqueuser.save()
     return HttpResponseRedirect(reverse('depts', args=[dept.lower()]))
 
 
 def drop_class(request, dept, course_num, section):
-    user = UniqueUser.objects.get(userID=request.user.id)
-    schedule = user.userSchedule.split()
+    schedule = request.user.uniqueuser.userSchedule.split()
     dropped = ""
     for c in schedule:
         if c == dept.upper() + '_' + str(course_num) + '_' + str(section) or \
@@ -182,20 +187,21 @@ def drop_class(request, dept, course_num, section):
         new_schedule = ""
         for c in schedule:
             new_schedule += " " + c
-        user.userSchedule = new_schedule
-        user.save()
-    print(user.userSchedule)
+        request.user.uniqueuser.userSchedule = new_schedule
+        request.user.uniqueuser.save()
+    print(request.user.uniqueuser.userSchedule)
     return HttpResponseRedirect(reverse('viewschedule'))
 
 
 @login_required
 def view_schedule(request):
-    user, created = UniqueUser.objects.get_or_create(
-        userID=request.user.id,
-        userName=request.user.username,
-        userEmail=request.user.email,
-    )
-    schedule = user.userSchedule.split()
+    # user, created = UniqueUser.objects.get_or_create(
+    #     user=request.user,
+    #     userID=request.user.id,
+    #     userName=request.user.username,
+    #     userEmail=request.user.email,
+    # )
+    schedule = request.user.uniqueuser.userSchedule.split()
     print(schedule)
     monday = []
     tuesday = []
@@ -323,6 +329,7 @@ def result(request):
     rn_post = request.GET.get('rn')
     dy_post = request.GET.get('dy')
     tm_post = request.GET.get('tm')
+    print(inst_post)
     posts = Subject.objects.all().order_by("subject")
     if search_post:
         posts = posts.filter(Q(subject__iexact=search_post)).order_by("catalog_number")
@@ -344,15 +351,8 @@ def result(request):
 
 @login_required
 def friendlist(request):
-    if(request.user.is_authenticated):
-        user, created = UniqueUser.objects.get_or_create(
-            userID=request.user.id,
-            userName=request.user.username,
-            userEmail=request.user.email,
-        )
-        posts= UniqueUser.objects.all()
-        posts= posts.filter(Q(userName__iexact=user.userName))
-        posts= posts.first()
+    if(request.user.uniqueuser.is_authenticate):
+        posts= request.user.uniqueuser
     else:
         posts=""
     return render(request, 'louslist/friendlist.html',{'posts':posts})
@@ -366,13 +366,8 @@ def friend_result(request):
 
 
 def addfriend(request, userName):
-    user, created = UniqueUser.objects.get_or_create(
-        userID=request.user.id,
-        userName=request.user.username,
-        userEmail=request.user.email,
-    )
-    user.userFriends.add(UniqueUser.objects.get(userName=userName))
-    user.save()
+    request.user.uniqueuser.userFriends.add(UniqueUser.objects.get(userName=userName))
+    request.user.uniqueuser.save()
     return HttpResponseRedirect(reverse('friendlist'))
 
 def schedules(request,userName):
@@ -470,7 +465,24 @@ def schedules(request,userName):
     # print(sunday)
     return render(request, 'louslist/schedules.html', context)
 
-
+def finished(request):
+    name_post = request.GET.get('name')
+    lana_post = request.GET.get('lana')
+    fina_post = request.GET.get('fina')
+    major_post = request.GET.get('major')
+    year_post= request.GET.get('year')
+    if(name_post=='' or lana_post=='' or fina_post=='' or major_post==''):
+        return render(request, 'louslist/create.html', {'posts':False})
+    else:
+        request.user.uniqueuser.times=1
+        request.user.uniqueuser.is_authenticate=True
+        request.user.uniqueuser.userName=name_post
+        request.user.uniqueuser.lastName=lana_post
+        request.user.uniqueuser.firstName=fina_post
+        request.user.uniqueuser.Major=major_post
+        request.user.uniqueuser.Year=year_post
+        request.user.uniqueuser.save()
+        return HttpResponseRedirect(reverse('home'))
 
 """
 @login_required

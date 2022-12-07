@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import User,AbstractUser
 from django.conf import settings
 
 
@@ -48,6 +48,13 @@ class UniqueUser(models.Model):
     userEmail = models.CharField(max_length=50)
     userFriends = models.ManyToManyField("UniqueUser", blank=True)
     userSchedule = models.CharField(max_length=500, default="")
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    is_authenticate=models.BooleanField(default=False)
+    times = models.IntegerField(default=0)
+    lastName = models.CharField(max_length=50,default='')
+    firstName = models.CharField(max_length=50,default='')
+    Major = models.CharField(max_length=50,default='')
+    Year= models.CharField(max_length=50,default='')
 
     def __str__(self):
         return self.userName
